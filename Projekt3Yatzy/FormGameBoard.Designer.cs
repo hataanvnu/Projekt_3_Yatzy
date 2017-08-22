@@ -1025,6 +1025,7 @@
             this.buttonThrowDice.TabIndex = 2;
             this.buttonThrowDice.Text = "Throw Dice";
             this.buttonThrowDice.UseVisualStyleBackColor = false;
+            this.buttonThrowDice.Click += new System.EventHandler(this.buttonThrowDice_Click);
             // 
             // labelPlayer3Fours
             // 
@@ -1433,6 +1434,7 @@
             this.pictureBoxDice1.Location = new System.Drawing.Point(500, 200);
             this.pictureBoxDice1.Name = "pictureBoxDice1";
             this.pictureBoxDice1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBoxDice1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxDice1.TabIndex = 3;
             this.pictureBoxDice1.TabStop = false;
             // 
@@ -1441,6 +1443,7 @@
             this.pictureBoxDice2.Location = new System.Drawing.Point(600, 75);
             this.pictureBoxDice2.Name = "pictureBoxDice2";
             this.pictureBoxDice2.Size = new System.Drawing.Size(100, 100);
+            this.pictureBoxDice2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxDice2.TabIndex = 3;
             this.pictureBoxDice2.TabStop = false;
             // 
@@ -1449,6 +1452,7 @@
             this.pictureBoxDice3.Location = new System.Drawing.Point(700, 200);
             this.pictureBoxDice3.Name = "pictureBoxDice3";
             this.pictureBoxDice3.Size = new System.Drawing.Size(100, 100);
+            this.pictureBoxDice3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxDice3.TabIndex = 3;
             this.pictureBoxDice3.TabStop = false;
             // 
@@ -1457,6 +1461,7 @@
             this.pictureBoxDice4.Location = new System.Drawing.Point(800, 75);
             this.pictureBoxDice4.Name = "pictureBoxDice4";
             this.pictureBoxDice4.Size = new System.Drawing.Size(100, 100);
+            this.pictureBoxDice4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxDice4.TabIndex = 3;
             this.pictureBoxDice4.TabStop = false;
             // 
@@ -1465,14 +1470,17 @@
             this.pictureBoxDice5.Location = new System.Drawing.Point(900, 200);
             this.pictureBoxDice5.Name = "pictureBoxDice5";
             this.pictureBoxDice5.Size = new System.Drawing.Size(100, 100);
+            this.pictureBoxDice5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxDice5.TabIndex = 3;
             this.pictureBoxDice5.TabStop = false;
             // 
             // textBoxStatus
             // 
+            this.textBoxStatus.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.textBoxStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxStatus.Location = new System.Drawing.Point(700, 372);
             this.textBoxStatus.Name = "textBoxStatus";
+            this.textBoxStatus.ReadOnly = true;
             this.textBoxStatus.Size = new System.Drawing.Size(381, 229);
             this.textBoxStatus.TabIndex = 4;
             this.textBoxStatus.Text = "Welcome!";
@@ -1481,6 +1489,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1093, 614);
             this.Controls.Add(this.textBoxStatus);
             this.Controls.Add(this.pictureBoxDice5);

@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DiceUtils.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +87,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="images\dice-1294902_960_720.png" />
+    <Content Include="images\dice1.png" />
+    <Content Include="images\dice2.png" />
+    <Content Include="images\noun_1186617_cc.png" />
+    <Content Include="images\noun_1186618_cc.png" />
+    <Content Include="images\noun_1186619_cc.png" />
+    <Content Include="images\noun_1186620_cc.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
