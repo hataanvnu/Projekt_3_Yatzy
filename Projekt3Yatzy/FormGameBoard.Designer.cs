@@ -91,7 +91,6 @@
             this.labelPlayer3Ones = new System.Windows.Forms.Label();
             this.labelPlayer3Threes = new System.Windows.Forms.Label();
             this.labelPlayer3Twos = new System.Windows.Forms.Label();
-            this.buttonThrowDice = new System.Windows.Forms.Button();
             this.labelPlayer3Fours = new System.Windows.Forms.Label();
             this.labelPlayer3Fives = new System.Windows.Forms.Label();
             this.labelPlayer3Sixes = new System.Windows.Forms.Label();
@@ -125,18 +124,19 @@
             this.labelPlayer4Threes = new System.Windows.Forms.Label();
             this.labelPlayer4Twos = new System.Windows.Forms.Label();
             this.labelPlayer4Ones = new System.Windows.Forms.Label();
+            this.buttonThrowDice = new System.Windows.Forms.Button();
+            this.pictureBoxDice0 = new System.Windows.Forms.PictureBox();
             this.pictureBoxDice1 = new System.Windows.Forms.PictureBox();
             this.pictureBoxDice2 = new System.Windows.Forms.PictureBox();
             this.pictureBoxDice3 = new System.Windows.Forms.PictureBox();
             this.pictureBoxDice4 = new System.Windows.Forms.PictureBox();
-            this.pictureBoxDice5 = new System.Windows.Forms.PictureBox();
             this.textBoxStatus = new System.Windows.Forms.RichTextBox();
             this.tableScoreBoard.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDice0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDice1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDice2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDice3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDice4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDice5)).BeginInit();
             this.SuspendLayout();
             // 
             // tableScoreBoard
@@ -150,7 +150,7 @@
             this.tableScoreBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableScoreBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableScoreBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
-            this.tableScoreBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 67F));
+            this.tableScoreBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 68F));
             this.tableScoreBoard.Controls.Add(this.labelPlayers, 0, 0);
             this.tableScoreBoard.Controls.Add(this.labelPlayer1, 1, 0);
             this.tableScoreBoard.Controls.Add(this.labelAces, 0, 1);
@@ -214,7 +214,6 @@
             this.tableScoreBoard.Controls.Add(this.labelPlayer3Threes, 3, 3);
             this.tableScoreBoard.Controls.Add(this.labelPlayer3Twos, 3, 2);
             this.tableScoreBoard.Controls.Add(this.labelPlayer3Fours, 3, 4);
-            this.tableScoreBoard.Controls.Add(this.labelPlayer3Fives, 3, 5);
             this.tableScoreBoard.Controls.Add(this.labelPlayer3Sixes, 3, 6);
             this.tableScoreBoard.Controls.Add(this.labelPlayer3Subtotal, 3, 7);
             this.tableScoreBoard.Controls.Add(this.labelPlayer3Bonus, 3, 8);
@@ -246,6 +245,7 @@
             this.tableScoreBoard.Controls.Add(this.labelPlayer4Threes, 4, 3);
             this.tableScoreBoard.Controls.Add(this.labelPlayer4Twos, 4, 2);
             this.tableScoreBoard.Controls.Add(this.labelPlayer4Ones, 4, 1);
+            this.tableScoreBoard.Controls.Add(this.labelPlayer3Fives, 3, 5);
             this.tableScoreBoard.Location = new System.Drawing.Point(12, 12);
             this.tableScoreBoard.Name = "tableScoreBoard";
             this.tableScoreBoard.RowCount = 19;
@@ -268,7 +268,7 @@
             this.tableScoreBoard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableScoreBoard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableScoreBoard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableScoreBoard.Size = new System.Drawing.Size(388, 590);
+            this.tableScoreBoard.Size = new System.Drawing.Size(389, 590);
             this.tableScoreBoard.TabIndex = 1;
             // 
             // labelPlayers
@@ -308,6 +308,7 @@
             this.labelAces.TabIndex = 2;
             this.labelAces.Text = "Aces";
             this.labelAces.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelAces.Click += new System.EventHandler(this.PointField_Click);
             // 
             // labelPlayer2
             // 
@@ -358,6 +359,7 @@
             this.labelTwos.TabIndex = 2;
             this.labelTwos.Text = "Twos";
             this.labelTwos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelTwos.Click += new System.EventHandler(this.PointField_Click);
             // 
             // labelThrees
             // 
@@ -369,6 +371,7 @@
             this.labelThrees.TabIndex = 2;
             this.labelThrees.Text = "Threes";
             this.labelThrees.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelThrees.Click += new System.EventHandler(this.PointField_Click);
             // 
             // labelFours
             // 
@@ -380,6 +383,7 @@
             this.labelFours.TabIndex = 2;
             this.labelFours.Text = "Fours";
             this.labelFours.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelFours.Click += new System.EventHandler(this.PointField_Click);
             // 
             // labelFives
             // 
@@ -391,6 +395,7 @@
             this.labelFives.TabIndex = 2;
             this.labelFives.Text = "Fives";
             this.labelFives.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelFives.Click += new System.EventHandler(this.PointField_Click);
             // 
             // labelSixes
             // 
@@ -402,6 +407,7 @@
             this.labelSixes.TabIndex = 2;
             this.labelSixes.Text = "Sixes";
             this.labelSixes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelSixes.Click += new System.EventHandler(this.PointField_Click);
             // 
             // labelSubtotal
             // 
@@ -439,6 +445,7 @@
             this.labelPair.TabIndex = 2;
             this.labelPair.Text = "Pair";
             this.labelPair.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelPair.Click += new System.EventHandler(this.PointField_Click);
             // 
             // labelTwoPairs
             // 
@@ -450,6 +457,7 @@
             this.labelTwoPairs.TabIndex = 2;
             this.labelTwoPairs.Text = "Two Pairs";
             this.labelTwoPairs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelTwoPairs.Click += new System.EventHandler(this.PointField_Click);
             // 
             // label3OfAKind
             // 
@@ -461,6 +469,7 @@
             this.label3OfAKind.TabIndex = 2;
             this.label3OfAKind.Text = "3 of a Kind";
             this.label3OfAKind.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label3OfAKind.Click += new System.EventHandler(this.PointField_Click);
             // 
             // label4OfAKind
             // 
@@ -472,6 +481,7 @@
             this.label4OfAKind.TabIndex = 2;
             this.label4OfAKind.Text = "4 of a Kind";
             this.label4OfAKind.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label4OfAKind.Click += new System.EventHandler(this.PointField_Click);
             // 
             // labelSmallStraight
             // 
@@ -483,6 +493,7 @@
             this.labelSmallStraight.TabIndex = 2;
             this.labelSmallStraight.Text = "Small Straight";
             this.labelSmallStraight.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelSmallStraight.Click += new System.EventHandler(this.PointField_Click);
             // 
             // labelLargeStraight
             // 
@@ -494,6 +505,7 @@
             this.labelLargeStraight.TabIndex = 2;
             this.labelLargeStraight.Text = "Large Straight";
             this.labelLargeStraight.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelLargeStraight.Click += new System.EventHandler(this.PointField_Click);
             // 
             // labelFullHouse
             // 
@@ -501,10 +513,11 @@
             this.labelFullHouse.Location = new System.Drawing.Point(4, 466);
             this.labelFullHouse.MinimumSize = new System.Drawing.Size(0, 30);
             this.labelFullHouse.Name = "labelFullHouse";
-            this.labelFullHouse.Size = new System.Drawing.Size(71, 30);
+            this.labelFullHouse.Size = new System.Drawing.Size(75, 30);
             this.labelFullHouse.TabIndex = 2;
-            this.labelFullHouse.Text = "FullHouse";
+            this.labelFullHouse.Text = "Full House";
             this.labelFullHouse.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelFullHouse.Click += new System.EventHandler(this.PointField_Click);
             // 
             // labelChance
             // 
@@ -516,6 +529,7 @@
             this.labelChance.TabIndex = 2;
             this.labelChance.Text = "Chance";
             this.labelChance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelChance.Click += new System.EventHandler(this.PointField_Click);
             // 
             // labelYatzy
             // 
@@ -527,6 +541,7 @@
             this.labelYatzy.TabIndex = 2;
             this.labelYatzy.Text = "Yatzy";
             this.labelYatzy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelYatzy.Click += new System.EventHandler(this.PointField_Click);
             // 
             // labelTotal
             // 
@@ -550,6 +565,7 @@
             this.labelPlayer1Aces.Name = "labelPlayer1Aces";
             this.labelPlayer1Aces.Size = new System.Drawing.Size(65, 30);
             this.labelPlayer1Aces.TabIndex = 3;
+            this.labelPlayer1Aces.Tag = "Aces";
             this.labelPlayer1Aces.Text = "-";
             this.labelPlayer1Aces.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -976,6 +992,7 @@
             this.labelPlayer2Ones.Name = "labelPlayer2Ones";
             this.labelPlayer2Ones.Size = new System.Drawing.Size(65, 30);
             this.labelPlayer2Ones.TabIndex = 3;
+            this.labelPlayer2Ones.Tag = "Aces";
             this.labelPlayer2Ones.Text = "-";
             this.labelPlayer2Ones.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -988,6 +1005,7 @@
             this.labelPlayer3Ones.Name = "labelPlayer3Ones";
             this.labelPlayer3Ones.Size = new System.Drawing.Size(65, 30);
             this.labelPlayer3Ones.TabIndex = 3;
+            this.labelPlayer3Ones.Tag = "Aces";
             this.labelPlayer3Ones.Text = "-";
             this.labelPlayer3Ones.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -1014,18 +1032,6 @@
             this.labelPlayer3Twos.TabIndex = 3;
             this.labelPlayer3Twos.Text = "-";
             this.labelPlayer3Twos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // buttonThrowDice
-            // 
-            this.buttonThrowDice.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.buttonThrowDice.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonThrowDice.Location = new System.Drawing.Point(424, 423);
-            this.buttonThrowDice.Name = "buttonThrowDice";
-            this.buttonThrowDice.Size = new System.Drawing.Size(252, 128);
-            this.buttonThrowDice.TabIndex = 2;
-            this.buttonThrowDice.Text = "Throw Dice";
-            this.buttonThrowDice.UseVisualStyleBackColor = false;
-            this.buttonThrowDice.Click += new System.EventHandler(this.buttonThrowDice_Click);
             // 
             // labelPlayer3Fours
             // 
@@ -1426,53 +1432,71 @@
             this.labelPlayer4Ones.Name = "labelPlayer4Ones";
             this.labelPlayer4Ones.Size = new System.Drawing.Size(65, 30);
             this.labelPlayer4Ones.TabIndex = 3;
+            this.labelPlayer4Ones.Tag = "Aces";
             this.labelPlayer4Ones.Text = "-";
             this.labelPlayer4Ones.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // buttonThrowDice
+            // 
+            this.buttonThrowDice.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.buttonThrowDice.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonThrowDice.Location = new System.Drawing.Point(424, 423);
+            this.buttonThrowDice.Name = "buttonThrowDice";
+            this.buttonThrowDice.Size = new System.Drawing.Size(252, 128);
+            this.buttonThrowDice.TabIndex = 2;
+            this.buttonThrowDice.Text = "Throw Dice";
+            this.buttonThrowDice.UseVisualStyleBackColor = false;
+            this.buttonThrowDice.Click += new System.EventHandler(this.buttonThrowDice_Click);
+            // 
+            // pictureBoxDice0
+            // 
+            this.pictureBoxDice0.Location = new System.Drawing.Point(500, 200);
+            this.pictureBoxDice0.Name = "pictureBoxDice0";
+            this.pictureBoxDice0.Size = new System.Drawing.Size(100, 100);
+            this.pictureBoxDice0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxDice0.TabIndex = 3;
+            this.pictureBoxDice0.TabStop = false;
+            this.pictureBoxDice0.Click += new System.EventHandler(this.pictureBoxDice0_Click);
+            // 
             // pictureBoxDice1
             // 
-            this.pictureBoxDice1.Location = new System.Drawing.Point(500, 200);
+            this.pictureBoxDice1.Location = new System.Drawing.Point(600, 75);
             this.pictureBoxDice1.Name = "pictureBoxDice1";
             this.pictureBoxDice1.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxDice1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxDice1.TabIndex = 3;
             this.pictureBoxDice1.TabStop = false;
+            this.pictureBoxDice1.Click += new System.EventHandler(this.pictureBoxDice1_Click);
             // 
             // pictureBoxDice2
             // 
-            this.pictureBoxDice2.Location = new System.Drawing.Point(600, 75);
+            this.pictureBoxDice2.Location = new System.Drawing.Point(700, 200);
             this.pictureBoxDice2.Name = "pictureBoxDice2";
             this.pictureBoxDice2.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxDice2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxDice2.TabIndex = 3;
             this.pictureBoxDice2.TabStop = false;
+            this.pictureBoxDice2.Click += new System.EventHandler(this.pictureBoxDice2_Click);
             // 
             // pictureBoxDice3
             // 
-            this.pictureBoxDice3.Location = new System.Drawing.Point(700, 200);
+            this.pictureBoxDice3.Location = new System.Drawing.Point(800, 75);
             this.pictureBoxDice3.Name = "pictureBoxDice3";
             this.pictureBoxDice3.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxDice3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxDice3.TabIndex = 3;
             this.pictureBoxDice3.TabStop = false;
+            this.pictureBoxDice3.Click += new System.EventHandler(this.pictureBoxDice3_Click);
             // 
             // pictureBoxDice4
             // 
-            this.pictureBoxDice4.Location = new System.Drawing.Point(800, 75);
+            this.pictureBoxDice4.Location = new System.Drawing.Point(900, 200);
             this.pictureBoxDice4.Name = "pictureBoxDice4";
             this.pictureBoxDice4.Size = new System.Drawing.Size(100, 100);
             this.pictureBoxDice4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxDice4.TabIndex = 3;
             this.pictureBoxDice4.TabStop = false;
-            // 
-            // pictureBoxDice5
-            // 
-            this.pictureBoxDice5.Location = new System.Drawing.Point(900, 200);
-            this.pictureBoxDice5.Name = "pictureBoxDice5";
-            this.pictureBoxDice5.Size = new System.Drawing.Size(100, 100);
-            this.pictureBoxDice5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxDice5.TabIndex = 3;
-            this.pictureBoxDice5.TabStop = false;
+            this.pictureBoxDice4.Click += new System.EventHandler(this.pictureBoxDice4_Click);
             // 
             // textBoxStatus
             // 
@@ -1492,11 +1516,11 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1093, 614);
             this.Controls.Add(this.textBoxStatus);
-            this.Controls.Add(this.pictureBoxDice5);
             this.Controls.Add(this.pictureBoxDice4);
             this.Controls.Add(this.pictureBoxDice3);
             this.Controls.Add(this.pictureBoxDice2);
             this.Controls.Add(this.pictureBoxDice1);
+            this.Controls.Add(this.pictureBoxDice0);
             this.Controls.Add(this.buttonThrowDice);
             this.Controls.Add(this.tableScoreBoard);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -1505,11 +1529,11 @@
             this.Load += new System.EventHandler(this.FormGameBoard_Load);
             this.tableScoreBoard.ResumeLayout(false);
             this.tableScoreBoard.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDice0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDice1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDice2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDice3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDice4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDice5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1614,11 +1638,11 @@
         private System.Windows.Forms.Label labelPlayer4Threes;
         private System.Windows.Forms.Label labelPlayer4Twos;
         private System.Windows.Forms.Label labelPlayer4Ones;
+        private System.Windows.Forms.PictureBox pictureBoxDice0;
         private System.Windows.Forms.PictureBox pictureBoxDice1;
         private System.Windows.Forms.PictureBox pictureBoxDice2;
         private System.Windows.Forms.PictureBox pictureBoxDice3;
         private System.Windows.Forms.PictureBox pictureBoxDice4;
-        private System.Windows.Forms.PictureBox pictureBoxDice5;
         private System.Windows.Forms.RichTextBox textBoxStatus;
     }
 }
