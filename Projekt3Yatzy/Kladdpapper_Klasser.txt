@@ -1,0 +1,15 @@
+GameBoard
+	PlayerName
+	id
+	version
+	PoängFält[]
+	dintur
+
+PoängFält
+	Poäng
+	Tagen
+	
+
+Skickas över nätverket:
+	GameBoard[]
+

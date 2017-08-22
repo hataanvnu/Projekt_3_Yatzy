@@ -10,11 +10,28 @@ using System.Windows.Forms;
 
 namespace Projekt3Yatzy
 {
-    public partial class Form1 : Form
+    public partial class FormStartPage : Form
     {
-        public Form1()
+        public FormStartPage()
         {
             InitializeComponent();
+        }
+
+        private void buttonStartGame_Click(object sender, EventArgs e)
+        {
+            if (textBoxEnterYourName.Text == "todo") // todo om username redan finns i current game
+            {
+                labelUserNameTaken.Visible = true;
+            }
+            else
+            {
+                textBoxEnterYourName.Enabled = false;
+                labelWaitingForPlayer.Visible = true;
+                buttonStartGame.Enabled = false;
+                labelUserNameTaken.Visible = false;
+
+            }
+
         }
     }
 }
