@@ -60,9 +60,6 @@
     <Compile Include="FormGameBoard.Designer.cs">
       <DependentUpon>FormGameBoard.cs</DependentUpon>
     </Compile>
-    <Compile Include="GameBoardJsonObject.cs" />
-    <Compile Include="PlayerGameBoard.cs" />
-    <Compile Include="PointField.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -93,7 +90,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\NetworkLibrary\NetworkLibrary.csproj">
+      <Project>{6B0EA2C5-9382-47B3-A312-2343FB642EEB}</Project>
+      <Name>NetworkLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProtocolUtils\ProtocolUtils.csproj">
+      <Project>{1479108c-9f67-467d-941f-ea634220f729}</Project>
+      <Name>ProtocolUtils</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="images\dice-1294902_960_720.png" />
     <Content Include="images\dice1.png" />
