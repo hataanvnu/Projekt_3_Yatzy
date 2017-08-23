@@ -17,8 +17,6 @@ namespace Projekt3Yatzy
 
         Dice[] diceArray = new Dice[5];
 
-        Label[] pointFields;
-
         int throwCounter = 0;
 
         int CurrentPlayer = 1;
