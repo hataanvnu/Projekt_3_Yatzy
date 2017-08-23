@@ -71,7 +71,7 @@ namespace Projekt3Yatzy
 
             if (throwsLeft == 0)
             {
-                buttonThrowDice.Enabled = false;
+                //buttonThrowDice.Enabled = false;
                 textBoxStatus.Text = $"Välj de tärningar du vill använda för poänggivning";
             }
             else
@@ -129,7 +129,7 @@ namespace Projekt3Yatzy
 
         //}
 
-        private void UpperSectionPointFieldManager (Dice[] chosenDice, int row)
+        private void UpperSectionPointFieldManager(Dice[] chosenDice, int row)
         {
             if (chosenDice.Length != 0)
             {
@@ -184,6 +184,7 @@ namespace Projekt3Yatzy
                         break;
                     case 10:
                         // Two pairs
+                        CheckTwoPairs(chosenDice, row);
                         break;
                     case 11:
                         // 3 of a kind
@@ -195,21 +196,97 @@ namespace Projekt3Yatzy
                         break;
                     case 13:
                         // small straight
+                        CheckIfStraight(1, chosenDice, row);
                         break;
                     case 14:
                         // large straight
+                        CheckIfStraight(2, chosenDice, row);
                         break;
                     case 15:
                         // Full house
+                        CheckIfFullHouse(chosenDice, row);
                         break;
                     case 16:
                         // Chance
+                        GivePointsForChance(diceArray, row);
                         break;
                     case 17:
                         // Yatzy - If 5, sätt 50 poäng
+                        CheckIfYatzy(diceArray, row);
                         break;
                     default:
                         break;
+                }
+            }
+        }
+
+        private void CheckIfYatzy(Dice[] diceArray, int row)
+        {
+            bool isYatzy = DiceValidationUtils.YatzyValidation(diceArray);
+
+            if (isYatzy)
+            {
+                Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, row);
+
+                myLabel.Text = "50";
+            }
+        }
+
+        private void GivePointsForChance(Dice[] diceArray, int row)
+        {
+            Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, row);
+
+            myLabel.Text = DiceValidationUtils.CalculatePoints(diceArray).ToString();
+        }
+
+        private void CheckIfFullHouse(Dice[] chosenDice, int row)
+        {
+            var sortedDice = chosenDice.OrderBy(d => d.Value).ToArray();
+
+            bool isFullHouse = DiceValidationUtils.FullHouseValidation(sortedDice);
+
+            if (isFullHouse)
+            {
+                Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, row);
+
+                myLabel.Text = DiceValidationUtils.CalculatePoints(chosenDice).ToString();
+            }
+        }
+
+        private void CheckTwoPairs(Dice[] chosenDice, int row)
+        {
+            var sortedDice = chosenDice.OrderBy(d => d.Value).ToArray();
+
+            bool isTwoPairs = DiceValidationUtils.TwoPairsValidation(sortedDice);
+
+            if (isTwoPairs)
+            {
+                Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, row);
+
+                myLabel.Text = DiceValidationUtils.CalculatePoints(chosenDice).ToString();
+            }
+
+        }
+
+        private void CheckIfStraight(int size, Dice[] chosenDice, int row)
+        {
+            var sortedDice = chosenDice.OrderBy(d => d.Value).ToArray();
+
+            bool isStraight = DiceValidationUtils.StraightValidation(size, sortedDice);
+
+            if (isStraight)
+            {
+                Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, row);
+
+                if (sortedDice.First().Value == 1)
+                {
+                    myLabel.Text = DiceValidationUtils.CalculatePoints(sortedDice).ToString();
+
+                }
+                else if (sortedDice.First().Value == 2)
+                {
+                    myLabel.Text = DiceValidationUtils.CalculatePoints(sortedDice).ToString();
+
                 }
             }
         }
