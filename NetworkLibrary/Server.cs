@@ -62,7 +62,7 @@ namespace NetworkLibrary
 
             if (jsonobject.Command=="Next Turn")
             {
-                jsonobject.CurrentPlayer++;
+                jsonobject.CurrentPlayer++; //todo modulus
                 
             }
 

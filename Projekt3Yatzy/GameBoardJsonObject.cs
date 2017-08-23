@@ -13,6 +13,16 @@ namespace Projekt3Yatzy
         public int CurrentPlayer { get; set; }
         public string Version { get; set; }
 
-
+        public GameBoardJsonObject(List<string> names)
+        {
+            Command = "Next turn";
+            ListOfGameBoards = new List<PlayerGameBoard>();
+            for (int i = 0; i < names.Count; i++)
+            {
+                ListOfGameBoards.Add(new PlayerGameBoard(names[i], i+1));
+            }
+            CurrentPlayer = 1;
+            Version = "1.0";
+        }
     }
 }

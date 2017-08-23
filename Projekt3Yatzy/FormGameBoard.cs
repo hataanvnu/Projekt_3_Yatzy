@@ -19,15 +19,18 @@ namespace Projekt3Yatzy
 
         int throwCounter = 0;
 
-        int CurrentPlayer = 1;
+        int CurrentPlayer = 4;
 
         int rowToCrossOut = 0;
 
-
+        GameBoardJsonObject gameBoardProtocoll;
+        List<string> testList = new List<string>{ "Petter", "Johan", "Micke", "Fanny" };
 
         public FormGameBoard()
         {
             InitializeComponent();
+            gameBoardProtocoll = new GameBoardJsonObject(testList);
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -40,6 +43,26 @@ namespace Projekt3Yatzy
         {
             // Initialize the list of dice
             InitializeDiceList();
+            UpdateFormGameBoard();
+
+        }
+
+        private void UpdateFormGameBoard()
+        {
+            for (int i = 0; i < gameBoardProtocoll.ListOfGameBoards.Count; i++)
+            {
+
+            //Sätter namn
+                Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(i+1, 0);
+                myLabel.Text = gameBoardProtocoll.ListOfGameBoards[i].Name;
+
+                for (int j = 0; j < gameBoardProtocoll.ListOfGameBoards[i].PointArray.Length; j++)
+                {
+                    myLabel= (Label)tableScoreBoard.GetControlFromPosition(i + 1, j+1);
+                    myLabel.Text = gameBoardProtocoll.ListOfGameBoards[i].PointArray[j].Point;
+                }
+
+            }
         }
 
         private void InitializeDiceList()
@@ -141,8 +164,9 @@ namespace Projekt3Yatzy
                 {
                     int points = DiceValidationUtils.CalculatePoints(row, chosenDice);
                     Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, row);
-
                     myLabel.Text = points.ToString();
+
+                    UpdateProtocolGameBoard(row, points);
 
                     // Todo: resetta variabler
                     //InitNewTurn();
@@ -160,6 +184,14 @@ namespace Projekt3Yatzy
             {
                 textBoxStatus.Text = "Normal people would choose at least one dice...";
             }
+        }
+
+        private void UpdateProtocolGameBoard(int row, int points)
+        {
+            gameBoardProtocoll.ListOfGameBoards[CurrentPlayer-1].PointArray[row].Point = points.ToString();
+            gameBoardProtocoll.ListOfGameBoards[CurrentPlayer-1].PointArray[row].IsUsed = true;
+
+
         }
 
         private void CalculateSubtotalAndBonus()
@@ -314,6 +346,8 @@ namespace Projekt3Yatzy
 
                 myLabel.Text = "50";
 
+                UpdateProtocolGameBoard(row, 50);
+
                 CalculateTotal();
             }
             else
@@ -326,7 +360,11 @@ namespace Projekt3Yatzy
         {
             Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, row);
 
-            myLabel.Text = DiceValidationUtils.CalculatePoints(diceArray).ToString();
+            int points = DiceValidationUtils.CalculatePoints(diceArray);
+
+            myLabel.Text = points.ToString();
+
+            UpdateProtocolGameBoard(row, points);
 
             CalculateTotal();
         }
@@ -341,7 +379,13 @@ namespace Projekt3Yatzy
             {
                 Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, row);
 
-                myLabel.Text = DiceValidationUtils.CalculatePoints(chosenDice).ToString();
+                int points = DiceValidationUtils.CalculatePoints(chosenDice);
+
+                myLabel.Text = points.ToString();
+
+                UpdateProtocolGameBoard(row, points);
+
+                //myLabel.Text = DiceValidationUtils.CalculatePoints(chosenDice).ToString();
 
                 CalculateTotal();
             }
@@ -361,7 +405,13 @@ namespace Projekt3Yatzy
             {
                 Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, row);
 
-                myLabel.Text = DiceValidationUtils.CalculatePoints(chosenDice).ToString();
+
+                int points = DiceValidationUtils.CalculatePoints(chosenDice);
+
+                myLabel.Text = points.ToString();
+
+                UpdateProtocolGameBoard(row, points);
+                //myLabel.Text = DiceValidationUtils.CalculatePoints(chosenDice).ToString();
 
                 CalculateTotal();
             }
@@ -382,16 +432,15 @@ namespace Projekt3Yatzy
             {
                 Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, row);
 
-                if (sortedDice.First().Value == 1)
-                {
-                    myLabel.Text = DiceValidationUtils.CalculatePoints(sortedDice).ToString();
 
-                }
-                else if (sortedDice.First().Value == 2)
-                {
-                    myLabel.Text = DiceValidationUtils.CalculatePoints(sortedDice).ToString();
+                int points = DiceValidationUtils.CalculatePoints(sortedDice);
 
-                }
+                myLabel.Text = points.ToString();
+
+                UpdateProtocolGameBoard(row, points);
+
+                //myLabel.Text = DiceValidationUtils.CalculatePoints(sortedDice).ToString();
+
 
                 CalculateTotal();
             }
@@ -411,7 +460,13 @@ namespace Projekt3Yatzy
 
                 Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, row);
 
+                //int points = DiceValidationUtils.CalculatePoints(chosenDice);
+
                 myLabel.Text = sum.ToString();
+
+                UpdateProtocolGameBoard(row, sum);
+
+                
                 CalculateTotal();
             }
             else

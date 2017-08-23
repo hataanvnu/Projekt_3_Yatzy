@@ -8,7 +8,15 @@ namespace Projekt3Yatzy
 {
     public class PointField
     {
-        public int Point { get; set; }
+        public string Point { get; set; }
         public bool IsUsed { get; set; }
+
+        public PointField()
+        {
+            Point = "-";
+            IsUsed = false;
+        }
     }
+
+
 }
