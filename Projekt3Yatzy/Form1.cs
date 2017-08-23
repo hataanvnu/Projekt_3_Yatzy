@@ -16,5 +16,19 @@ namespace Projekt3Yatzy
         {
             InitializeComponent();
         }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+            
+        }
+        void tableLayoutPanel1_CellPaint(object sender, TableLayoutCellPaintEventArgs e)
+        {
+            if (e.Row == 0 || e.Row == 2)
+            {
+                Graphics g = e.Graphics;
+                Rectangle r = e.CellBounds;
+                g.FillRectangle(Brushes.Blue, r);
+            }
+        }
     }
 }
