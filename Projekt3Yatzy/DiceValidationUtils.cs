@@ -35,7 +35,7 @@ namespace Projekt3Yatzy
 
         internal static bool CheckMatchingDiceValidation(int numDice, Dice[] chosenDice)
         {
-            if (chosenDice.Length == numDice)
+            if (chosenDice.Length == numDice) // för att validera att par/ triss/ fyrtal-kriteriet matchas
             {
                 int value = chosenDice.First().Value;
 
