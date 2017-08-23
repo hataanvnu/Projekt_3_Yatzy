@@ -152,7 +152,7 @@
             this.tableScoreBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableScoreBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableScoreBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
-            this.tableScoreBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
+            this.tableScoreBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 66F));
             this.tableScoreBoard.Controls.Add(this.labelPlayers, 0, 0);
             this.tableScoreBoard.Controls.Add(this.labelPlayer1, 1, 0);
             this.tableScoreBoard.Controls.Add(this.labelAces, 0, 1);
@@ -270,7 +270,7 @@
             this.tableScoreBoard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableScoreBoard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableScoreBoard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableScoreBoard.Size = new System.Drawing.Size(386, 590);
+            this.tableScoreBoard.Size = new System.Drawing.Size(387, 590);
             this.tableScoreBoard.TabIndex = 1;
             // 
             // labelPlayers
@@ -304,9 +304,10 @@
             // 
             this.labelAces.AutoSize = true;
             this.labelAces.Location = new System.Drawing.Point(4, 32);
-            this.labelAces.MinimumSize = new System.Drawing.Size(0, 30);
+            this.labelAces.Margin = new System.Windows.Forms.Padding(0);
+            this.labelAces.MinimumSize = new System.Drawing.Size(115, 30);
             this.labelAces.Name = "labelAces";
-            this.labelAces.Size = new System.Drawing.Size(39, 30);
+            this.labelAces.Size = new System.Drawing.Size(115, 30);
             this.labelAces.TabIndex = 2;
             this.labelAces.Text = "Aces";
             this.labelAces.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -355,9 +356,10 @@
             // 
             this.labelTwos.AutoSize = true;
             this.labelTwos.Location = new System.Drawing.Point(4, 63);
-            this.labelTwos.MinimumSize = new System.Drawing.Size(0, 30);
+            this.labelTwos.Margin = new System.Windows.Forms.Padding(0);
+            this.labelTwos.MinimumSize = new System.Drawing.Size(115, 30);
             this.labelTwos.Name = "labelTwos";
-            this.labelTwos.Size = new System.Drawing.Size(41, 30);
+            this.labelTwos.Size = new System.Drawing.Size(115, 30);
             this.labelTwos.TabIndex = 2;
             this.labelTwos.Text = "Twos";
             this.labelTwos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -367,9 +369,10 @@
             // 
             this.labelThrees.AutoSize = true;
             this.labelThrees.Location = new System.Drawing.Point(4, 94);
-            this.labelThrees.MinimumSize = new System.Drawing.Size(0, 30);
+            this.labelThrees.Margin = new System.Windows.Forms.Padding(0);
+            this.labelThrees.MinimumSize = new System.Drawing.Size(115, 30);
             this.labelThrees.Name = "labelThrees";
-            this.labelThrees.Size = new System.Drawing.Size(53, 30);
+            this.labelThrees.Size = new System.Drawing.Size(115, 30);
             this.labelThrees.TabIndex = 2;
             this.labelThrees.Text = "Threes";
             this.labelThrees.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -379,9 +382,10 @@
             // 
             this.labelFours.AutoSize = true;
             this.labelFours.Location = new System.Drawing.Point(4, 125);
-            this.labelFours.MinimumSize = new System.Drawing.Size(0, 30);
+            this.labelFours.Margin = new System.Windows.Forms.Padding(0);
+            this.labelFours.MinimumSize = new System.Drawing.Size(115, 30);
             this.labelFours.Name = "labelFours";
-            this.labelFours.Size = new System.Drawing.Size(44, 30);
+            this.labelFours.Size = new System.Drawing.Size(115, 30);
             this.labelFours.TabIndex = 2;
             this.labelFours.Text = "Fours";
             this.labelFours.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -391,9 +395,10 @@
             // 
             this.labelFives.AutoSize = true;
             this.labelFives.Location = new System.Drawing.Point(4, 156);
-            this.labelFives.MinimumSize = new System.Drawing.Size(0, 30);
+            this.labelFives.Margin = new System.Windows.Forms.Padding(0);
+            this.labelFives.MinimumSize = new System.Drawing.Size(115, 30);
             this.labelFives.Name = "labelFives";
-            this.labelFives.Size = new System.Drawing.Size(41, 30);
+            this.labelFives.Size = new System.Drawing.Size(115, 30);
             this.labelFives.TabIndex = 2;
             this.labelFives.Text = "Fives";
             this.labelFives.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -403,9 +408,10 @@
             // 
             this.labelSixes.AutoSize = true;
             this.labelSixes.Location = new System.Drawing.Point(4, 187);
-            this.labelSixes.MinimumSize = new System.Drawing.Size(0, 30);
+            this.labelSixes.Margin = new System.Windows.Forms.Padding(0);
+            this.labelSixes.MinimumSize = new System.Drawing.Size(115, 30);
             this.labelSixes.Name = "labelSixes";
-            this.labelSixes.Size = new System.Drawing.Size(41, 30);
+            this.labelSixes.Size = new System.Drawing.Size(115, 30);
             this.labelSixes.TabIndex = 2;
             this.labelSixes.Text = "Sixes";
             this.labelSixes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -441,9 +447,10 @@
             // 
             this.labelPair.AutoSize = true;
             this.labelPair.Location = new System.Drawing.Point(4, 280);
-            this.labelPair.MinimumSize = new System.Drawing.Size(0, 30);
+            this.labelPair.Margin = new System.Windows.Forms.Padding(0);
+            this.labelPair.MinimumSize = new System.Drawing.Size(115, 30);
             this.labelPair.Name = "labelPair";
-            this.labelPair.Size = new System.Drawing.Size(33, 30);
+            this.labelPair.Size = new System.Drawing.Size(115, 30);
             this.labelPair.TabIndex = 2;
             this.labelPair.Text = "Pair";
             this.labelPair.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -453,9 +460,10 @@
             // 
             this.labelTwoPairs.AutoSize = true;
             this.labelTwoPairs.Location = new System.Drawing.Point(4, 311);
-            this.labelTwoPairs.MinimumSize = new System.Drawing.Size(0, 30);
+            this.labelTwoPairs.Margin = new System.Windows.Forms.Padding(0);
+            this.labelTwoPairs.MinimumSize = new System.Drawing.Size(115, 30);
             this.labelTwoPairs.Name = "labelTwoPairs";
-            this.labelTwoPairs.Size = new System.Drawing.Size(70, 30);
+            this.labelTwoPairs.Size = new System.Drawing.Size(115, 30);
             this.labelTwoPairs.TabIndex = 2;
             this.labelTwoPairs.Text = "Two Pairs";
             this.labelTwoPairs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -465,9 +473,10 @@
             // 
             this.label3OfAKind.AutoSize = true;
             this.label3OfAKind.Location = new System.Drawing.Point(4, 342);
-            this.label3OfAKind.MinimumSize = new System.Drawing.Size(0, 30);
+            this.label3OfAKind.Margin = new System.Windows.Forms.Padding(0);
+            this.label3OfAKind.MinimumSize = new System.Drawing.Size(115, 30);
             this.label3OfAKind.Name = "label3OfAKind";
-            this.label3OfAKind.Size = new System.Drawing.Size(76, 30);
+            this.label3OfAKind.Size = new System.Drawing.Size(115, 30);
             this.label3OfAKind.TabIndex = 2;
             this.label3OfAKind.Text = "3 of a Kind";
             this.label3OfAKind.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -477,9 +486,10 @@
             // 
             this.label4OfAKind.AutoSize = true;
             this.label4OfAKind.Location = new System.Drawing.Point(4, 373);
-            this.label4OfAKind.MinimumSize = new System.Drawing.Size(0, 30);
+            this.label4OfAKind.Margin = new System.Windows.Forms.Padding(0);
+            this.label4OfAKind.MinimumSize = new System.Drawing.Size(115, 30);
             this.label4OfAKind.Name = "label4OfAKind";
-            this.label4OfAKind.Size = new System.Drawing.Size(76, 30);
+            this.label4OfAKind.Size = new System.Drawing.Size(115, 30);
             this.label4OfAKind.TabIndex = 2;
             this.label4OfAKind.Text = "4 of a Kind";
             this.label4OfAKind.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -489,9 +499,10 @@
             // 
             this.labelSmallStraight.AutoSize = true;
             this.labelSmallStraight.Location = new System.Drawing.Point(4, 404);
-            this.labelSmallStraight.MinimumSize = new System.Drawing.Size(0, 30);
+            this.labelSmallStraight.Margin = new System.Windows.Forms.Padding(0);
+            this.labelSmallStraight.MinimumSize = new System.Drawing.Size(115, 30);
             this.labelSmallStraight.Name = "labelSmallStraight";
-            this.labelSmallStraight.Size = new System.Drawing.Size(95, 30);
+            this.labelSmallStraight.Size = new System.Drawing.Size(115, 30);
             this.labelSmallStraight.TabIndex = 2;
             this.labelSmallStraight.Text = "Small Straight";
             this.labelSmallStraight.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -501,9 +512,10 @@
             // 
             this.labelLargeStraight.AutoSize = true;
             this.labelLargeStraight.Location = new System.Drawing.Point(4, 435);
-            this.labelLargeStraight.MinimumSize = new System.Drawing.Size(0, 30);
+            this.labelLargeStraight.Margin = new System.Windows.Forms.Padding(0);
+            this.labelLargeStraight.MinimumSize = new System.Drawing.Size(115, 30);
             this.labelLargeStraight.Name = "labelLargeStraight";
-            this.labelLargeStraight.Size = new System.Drawing.Size(98, 30);
+            this.labelLargeStraight.Size = new System.Drawing.Size(115, 30);
             this.labelLargeStraight.TabIndex = 2;
             this.labelLargeStraight.Text = "Large Straight";
             this.labelLargeStraight.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -513,9 +525,10 @@
             // 
             this.labelFullHouse.AutoSize = true;
             this.labelFullHouse.Location = new System.Drawing.Point(4, 466);
-            this.labelFullHouse.MinimumSize = new System.Drawing.Size(0, 30);
+            this.labelFullHouse.Margin = new System.Windows.Forms.Padding(0);
+            this.labelFullHouse.MinimumSize = new System.Drawing.Size(115, 30);
             this.labelFullHouse.Name = "labelFullHouse";
-            this.labelFullHouse.Size = new System.Drawing.Size(75, 30);
+            this.labelFullHouse.Size = new System.Drawing.Size(115, 30);
             this.labelFullHouse.TabIndex = 2;
             this.labelFullHouse.Text = "Full House";
             this.labelFullHouse.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -525,9 +538,10 @@
             // 
             this.labelChance.AutoSize = true;
             this.labelChance.Location = new System.Drawing.Point(4, 497);
-            this.labelChance.MinimumSize = new System.Drawing.Size(0, 30);
+            this.labelChance.Margin = new System.Windows.Forms.Padding(0);
+            this.labelChance.MinimumSize = new System.Drawing.Size(115, 30);
             this.labelChance.Name = "labelChance";
-            this.labelChance.Size = new System.Drawing.Size(56, 30);
+            this.labelChance.Size = new System.Drawing.Size(115, 30);
             this.labelChance.TabIndex = 2;
             this.labelChance.Text = "Chance";
             this.labelChance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -537,9 +551,10 @@
             // 
             this.labelYatzy.AutoSize = true;
             this.labelYatzy.Location = new System.Drawing.Point(4, 528);
-            this.labelYatzy.MinimumSize = new System.Drawing.Size(0, 30);
+            this.labelYatzy.Margin = new System.Windows.Forms.Padding(0);
+            this.labelYatzy.MinimumSize = new System.Drawing.Size(115, 30);
             this.labelYatzy.Name = "labelYatzy";
-            this.labelYatzy.Size = new System.Drawing.Size(43, 30);
+            this.labelYatzy.Size = new System.Drawing.Size(115, 30);
             this.labelYatzy.TabIndex = 2;
             this.labelYatzy.Text = "Yatzy";
             this.labelYatzy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
