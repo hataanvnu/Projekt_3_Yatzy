@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Projekt3Yatzy
+namespace ProtocolUtils
 {
     public class PointField
     {

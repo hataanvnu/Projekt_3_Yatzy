@@ -20,11 +20,8 @@ namespace Projekt3Yatzy
             Application.SetCompatibleTextRenderingDefault(false);
             
             Application.Run(new FormGameBoard());
-            Client myClient = new Client();
 
-            Thread clientThread = new Thread(myClient.Start);
-            clientThread.Start();
-            clientThread.Join();
+            
         }
     }
 }

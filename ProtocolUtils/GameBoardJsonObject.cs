@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Projekt3Yatzy
+namespace ProtocolUtils
 {
     public class GameBoardJsonObject
     {
@@ -12,14 +12,16 @@ namespace Projekt3Yatzy
         public List<PlayerGameBoard> ListOfGameBoards { get; set; }
         public int CurrentPlayer { get; set; }
         public string Version { get; set; }
+        public List<string> Names { get; set; }
 
         public GameBoardJsonObject(List<string> names)
         {
+            Names = names;
             Command = "Next turn";
             ListOfGameBoards = new List<PlayerGameBoard>();
-            for (int i = 0; i < names.Count; i++)
+            for (int i = 0; i < Names.Count; i++)
             {
-                ListOfGameBoards.Add(new PlayerGameBoard(names[i], i+1));
+                ListOfGameBoards.Add(new PlayerGameBoard(Names[i], i+1));
             }
             CurrentPlayer = 1;
             Version = "1.0";

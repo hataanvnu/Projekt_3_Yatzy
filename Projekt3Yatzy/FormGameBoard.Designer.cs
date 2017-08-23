@@ -152,7 +152,7 @@
             this.tableScoreBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableScoreBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableScoreBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
-            this.tableScoreBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 69F));
+            this.tableScoreBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableScoreBoard.Controls.Add(this.labelPlayers, 0, 0);
             this.tableScoreBoard.Controls.Add(this.labelPlayer1, 1, 0);
             this.tableScoreBoard.Controls.Add(this.labelAces, 0, 1);
@@ -270,7 +270,7 @@
             this.tableScoreBoard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableScoreBoard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableScoreBoard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableScoreBoard.Size = new System.Drawing.Size(390, 590);
+            this.tableScoreBoard.Size = new System.Drawing.Size(386, 590);
             this.tableScoreBoard.TabIndex = 1;
             // 
             // labelPlayers
@@ -344,9 +344,9 @@
             this.labelPlayer4.BackColor = System.Drawing.SystemColors.ControlLight;
             this.labelPlayer4.Location = new System.Drawing.Point(320, 1);
             this.labelPlayer4.Margin = new System.Windows.Forms.Padding(0);
-            this.labelPlayer4.MinimumSize = new System.Drawing.Size(67, 30);
+            this.labelPlayer4.MinimumSize = new System.Drawing.Size(65, 30);
             this.labelPlayer4.Name = "labelPlayer4";
-            this.labelPlayer4.Size = new System.Drawing.Size(67, 30);
+            this.labelPlayer4.Size = new System.Drawing.Size(65, 30);
             this.labelPlayer4.TabIndex = 1;
             this.labelPlayer4.Text = "-";
             this.labelPlayer4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1212,9 +1212,9 @@
             this.labelPlayer4Total.BackColor = System.Drawing.SystemColors.ControlLight;
             this.labelPlayer4Total.Location = new System.Drawing.Point(320, 559);
             this.labelPlayer4Total.Margin = new System.Windows.Forms.Padding(0);
-            this.labelPlayer4Total.MinimumSize = new System.Drawing.Size(67, 30);
+            this.labelPlayer4Total.MinimumSize = new System.Drawing.Size(65, 30);
             this.labelPlayer4Total.Name = "labelPlayer4Total";
-            this.labelPlayer4Total.Size = new System.Drawing.Size(67, 30);
+            this.labelPlayer4Total.Size = new System.Drawing.Size(65, 30);
             this.labelPlayer4Total.TabIndex = 3;
             this.labelPlayer4Total.Text = "-";
             this.labelPlayer4Total.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1333,9 +1333,9 @@
             this.labelPlayer4Bonus.BackColor = System.Drawing.SystemColors.ControlLight;
             this.labelPlayer4Bonus.Location = new System.Drawing.Point(320, 249);
             this.labelPlayer4Bonus.Margin = new System.Windows.Forms.Padding(0);
-            this.labelPlayer4Bonus.MinimumSize = new System.Drawing.Size(67, 30);
+            this.labelPlayer4Bonus.MinimumSize = new System.Drawing.Size(65, 30);
             this.labelPlayer4Bonus.Name = "labelPlayer4Bonus";
-            this.labelPlayer4Bonus.Size = new System.Drawing.Size(67, 30);
+            this.labelPlayer4Bonus.Size = new System.Drawing.Size(65, 30);
             this.labelPlayer4Bonus.TabIndex = 3;
             this.labelPlayer4Bonus.Text = "-";
             this.labelPlayer4Bonus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1346,9 +1346,9 @@
             this.labelPlayer4Subtotal.BackColor = System.Drawing.SystemColors.ControlLight;
             this.labelPlayer4Subtotal.Location = new System.Drawing.Point(320, 218);
             this.labelPlayer4Subtotal.Margin = new System.Windows.Forms.Padding(0);
-            this.labelPlayer4Subtotal.MinimumSize = new System.Drawing.Size(67, 30);
+            this.labelPlayer4Subtotal.MinimumSize = new System.Drawing.Size(65, 30);
             this.labelPlayer4Subtotal.Name = "labelPlayer4Subtotal";
-            this.labelPlayer4Subtotal.Size = new System.Drawing.Size(67, 30);
+            this.labelPlayer4Subtotal.Size = new System.Drawing.Size(65, 30);
             this.labelPlayer4Subtotal.TabIndex = 3;
             this.labelPlayer4Subtotal.Text = "-";
             this.labelPlayer4Subtotal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

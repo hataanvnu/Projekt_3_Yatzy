@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using ProtocolUtils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,7 +15,7 @@ namespace Projekt3Yatzy
 {
     public partial class FormGameBoard : Form
     {
-
+        public Client MyClient { get; set; }
         PictureBox[] pictureBoxDiceList = new PictureBox[5];
 
         Dice[] diceArray = new Dice[5];
@@ -23,13 +26,19 @@ namespace Projekt3Yatzy
 
         int rowToCrossOut = 0;
 
-        GameBoardJsonObject gameBoardProtocoll;
+        GameBoardJsonObject gameBoardProtocol;
         List<string> testList = new List<string>{ "Petter", "Johan", "Micke", "Fanny" };
 
         public FormGameBoard()
         {
             InitializeComponent();
-            gameBoardProtocoll = new GameBoardJsonObject(testList);
+            gameBoardProtocol = new GameBoardJsonObject(testList);
+
+            MyClient = new Client(this);
+
+            Thread clientThread = new Thread(MyClient.Start);
+            clientThread.Start();
+            
 
         }
 
@@ -43,23 +52,23 @@ namespace Projekt3Yatzy
         {
             // Initialize the list of dice
             InitializeDiceList();
-            UpdateFormGameBoard();
+            UpdateFormGameBoard(gameBoardProtocol);
 
         }
 
-        private void UpdateFormGameBoard()
+        public void UpdateFormGameBoard(GameBoardJsonObject gameBoardProtocol)
         {
-            for (int i = 0; i < gameBoardProtocoll.ListOfGameBoards.Count; i++)
+            for (int col = 0; col < gameBoardProtocol.ListOfGameBoards.Count; col++)
             {
 
             //Sätter namn
-                Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(i+1, 0);
-                myLabel.Text = gameBoardProtocoll.ListOfGameBoards[i].Name;
+                Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(col+1, 0);
+                myLabel.Text = gameBoardProtocol.ListOfGameBoards[col].Name;
 
-                for (int j = 0; j < gameBoardProtocoll.ListOfGameBoards[i].PointArray.Length; j++)
+                for (int row = 1; row < gameBoardProtocol.ListOfGameBoards[col].PointArray.Length; row++)
                 {
-                    myLabel= (Label)tableScoreBoard.GetControlFromPosition(i + 1, j+1);
-                    myLabel.Text = gameBoardProtocoll.ListOfGameBoards[i].PointArray[j].Point;
+                    myLabel= (Label)tableScoreBoard.GetControlFromPosition(col + 1, row);
+                    myLabel.Text = gameBoardProtocol.ListOfGameBoards[col].PointArray[row].Point;
                 }
 
             }
@@ -188,10 +197,17 @@ namespace Projekt3Yatzy
 
         private void UpdateProtocolGameBoard(int row, int points)
         {
-            gameBoardProtocoll.ListOfGameBoards[CurrentPlayer-1].PointArray[row].Point = points.ToString();
-            gameBoardProtocoll.ListOfGameBoards[CurrentPlayer-1].PointArray[row].IsUsed = true;
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer-1].PointArray[row].Point = points.ToString();
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer-1].PointArray[row].IsUsed = true;
 
+            SendProtocolToServer();
+        }
 
+        private void SendProtocolToServer()
+        {
+            string protocol = JsonConvert.SerializeObject(gameBoardProtocol);
+
+            MyClient.Send(protocol);
         }
 
         private void CalculateSubtotalAndBonus()
