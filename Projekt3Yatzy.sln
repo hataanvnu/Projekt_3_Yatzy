@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projekt3Yatzy", "Projekt3Yatzy\Projekt3Yatzy.csproj", "{E4FA011A-1BA0-407C-B34D-3818DEC03E89}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkLibrary", "NetworkLibrary\NetworkLibrary.csproj", "{6B0EA2C5-9382-47B3-A312-2343FB642EEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkServer", "NetworkServer\NetworkServer.csproj", "{9E25F1E7-E492-4134-86D1-0D3E3830A004}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{E4FA011A-1BA0-407C-B34D-3818DEC03E89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4FA011A-1BA0-407C-B34D-3818DEC03E89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4FA011A-1BA0-407C-B34D-3818DEC03E89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B0EA2C5-9382-47B3-A312-2343FB642EEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B0EA2C5-9382-47B3-A312-2343FB642EEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B0EA2C5-9382-47B3-A312-2343FB642EEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B0EA2C5-9382-47B3-A312-2343FB642EEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E25F1E7-E492-4134-86D1-0D3E3830A004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E25F1E7-E492-4134-86D1-0D3E3830A004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E25F1E7-E492-4134-86D1-0D3E3830A004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E25F1E7-E492-4134-86D1-0D3E3830A004}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
