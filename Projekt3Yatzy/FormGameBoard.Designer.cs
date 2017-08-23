@@ -92,7 +92,6 @@
             this.labelPlayer3Threes = new System.Windows.Forms.Label();
             this.labelPlayer3Twos = new System.Windows.Forms.Label();
             this.labelPlayer3Fours = new System.Windows.Forms.Label();
-            this.labelPlayer3Fives = new System.Windows.Forms.Label();
             this.labelPlayer3Sixes = new System.Windows.Forms.Label();
             this.labelPlayer3Subtotal = new System.Windows.Forms.Label();
             this.labelPlayer3Bonus = new System.Windows.Forms.Label();
@@ -124,6 +123,7 @@
             this.labelPlayer4Threes = new System.Windows.Forms.Label();
             this.labelPlayer4Twos = new System.Windows.Forms.Label();
             this.labelPlayer4Ones = new System.Windows.Forms.Label();
+            this.labelPlayer3Fives = new System.Windows.Forms.Label();
             this.buttonThrowDice = new System.Windows.Forms.Button();
             this.pictureBoxDice0 = new System.Windows.Forms.PictureBox();
             this.pictureBoxDice1 = new System.Windows.Forms.PictureBox();
@@ -131,6 +131,8 @@
             this.pictureBoxDice3 = new System.Windows.Forms.PictureBox();
             this.pictureBoxDice4 = new System.Windows.Forms.PictureBox();
             this.textBoxStatus = new System.Windows.Forms.RichTextBox();
+            this.buttonCrossOutNo = new System.Windows.Forms.Button();
+            this.buttonCrossOutYes = new System.Windows.Forms.Button();
             this.tableScoreBoard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDice0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDice1)).BeginInit();
@@ -150,7 +152,7 @@
             this.tableScoreBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableScoreBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableScoreBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
-            this.tableScoreBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 68F));
+            this.tableScoreBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 69F));
             this.tableScoreBoard.Controls.Add(this.labelPlayers, 0, 0);
             this.tableScoreBoard.Controls.Add(this.labelPlayer1, 1, 0);
             this.tableScoreBoard.Controls.Add(this.labelAces, 0, 1);
@@ -268,7 +270,7 @@
             this.tableScoreBoard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableScoreBoard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableScoreBoard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableScoreBoard.Size = new System.Drawing.Size(389, 590);
+            this.tableScoreBoard.Size = new System.Drawing.Size(390, 590);
             this.tableScoreBoard.TabIndex = 1;
             // 
             // labelPlayers
@@ -1045,18 +1047,6 @@
             this.labelPlayer3Fours.Text = "-";
             this.labelPlayer3Fours.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // labelPlayer3Fives
-            // 
-            this.labelPlayer3Fives.AutoSize = true;
-            this.labelPlayer3Fives.Location = new System.Drawing.Point(254, 156);
-            this.labelPlayer3Fives.Margin = new System.Windows.Forms.Padding(0);
-            this.labelPlayer3Fives.MinimumSize = new System.Drawing.Size(65, 30);
-            this.labelPlayer3Fives.Name = "labelPlayer3Fives";
-            this.labelPlayer3Fives.Size = new System.Drawing.Size(65, 30);
-            this.labelPlayer3Fives.TabIndex = 3;
-            this.labelPlayer3Fives.Text = "-";
-            this.labelPlayer3Fives.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // labelPlayer3Sixes
             // 
             this.labelPlayer3Sixes.AutoSize = true;
@@ -1436,6 +1426,18 @@
             this.labelPlayer4Ones.Text = "-";
             this.labelPlayer4Ones.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // labelPlayer3Fives
+            // 
+            this.labelPlayer3Fives.AutoSize = true;
+            this.labelPlayer3Fives.Location = new System.Drawing.Point(254, 156);
+            this.labelPlayer3Fives.Margin = new System.Windows.Forms.Padding(0);
+            this.labelPlayer3Fives.MinimumSize = new System.Drawing.Size(65, 30);
+            this.labelPlayer3Fives.Name = "labelPlayer3Fives";
+            this.labelPlayer3Fives.Size = new System.Drawing.Size(65, 30);
+            this.labelPlayer3Fives.TabIndex = 3;
+            this.labelPlayer3Fives.Text = "-";
+            this.labelPlayer3Fives.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // buttonThrowDice
             // 
             this.buttonThrowDice.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -1509,12 +1511,36 @@
             this.textBoxStatus.TabIndex = 4;
             this.textBoxStatus.Text = "Welcome!";
             // 
+            // buttonCrossOutNo
+            // 
+            this.buttonCrossOutNo.Location = new System.Drawing.Point(971, 539);
+            this.buttonCrossOutNo.Name = "buttonCrossOutNo";
+            this.buttonCrossOutNo.Size = new System.Drawing.Size(75, 31);
+            this.buttonCrossOutNo.TabIndex = 5;
+            this.buttonCrossOutNo.Text = "No";
+            this.buttonCrossOutNo.UseVisualStyleBackColor = true;
+            this.buttonCrossOutNo.Visible = false;
+            this.buttonCrossOutNo.Click += new System.EventHandler(this.buttonCrossOutNo_Click);
+            // 
+            // buttonCrossOutYes
+            // 
+            this.buttonCrossOutYes.Location = new System.Drawing.Point(890, 539);
+            this.buttonCrossOutYes.Name = "buttonCrossOutYes";
+            this.buttonCrossOutYes.Size = new System.Drawing.Size(75, 31);
+            this.buttonCrossOutYes.TabIndex = 5;
+            this.buttonCrossOutYes.Text = "Yes";
+            this.buttonCrossOutYes.UseVisualStyleBackColor = true;
+            this.buttonCrossOutYes.Visible = false;
+            this.buttonCrossOutYes.Click += new System.EventHandler(this.buttonCrossOutYes_Click);
+            // 
             // FormGameBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1093, 614);
+            this.Controls.Add(this.buttonCrossOutYes);
+            this.Controls.Add(this.buttonCrossOutNo);
             this.Controls.Add(this.textBoxStatus);
             this.Controls.Add(this.pictureBoxDice4);
             this.Controls.Add(this.pictureBoxDice3);
@@ -1644,5 +1670,7 @@
         private System.Windows.Forms.PictureBox pictureBoxDice3;
         private System.Windows.Forms.PictureBox pictureBoxDice4;
         private System.Windows.Forms.RichTextBox textBoxStatus;
+        private System.Windows.Forms.Button buttonCrossOutNo;
+        private System.Windows.Forms.Button buttonCrossOutYes;
     }
 }

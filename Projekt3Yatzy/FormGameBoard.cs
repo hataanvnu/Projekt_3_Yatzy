@@ -21,6 +21,8 @@ namespace Projekt3Yatzy
 
         int CurrentPlayer = 1;
 
+        int rowToCrossOut = 0;
+
 
 
         public FormGameBoard()
@@ -145,10 +147,13 @@ namespace Projekt3Yatzy
                     // Todo: resetta variabler
                     //InitNewTurn();
 
+                    // Kolla om bonusdags
+                    CalculateSubtotalAndBonus();
+                    CalculateTotal();
                 }
                 else
                 {
-                    textBoxStatus.Text = "fu";
+                    CrossOutHandler(row);
                 }
             }
             else
@@ -157,6 +162,80 @@ namespace Projekt3Yatzy
             }
         }
 
+        private void CalculateSubtotalAndBonus()
+        {
+            int sum = 0;
+            for (int i = 1; i <= 6; i++)
+            {
+                Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, i);
+
+                int points = 0;
+                try
+                {
+                    points = Convert.ToInt32(myLabel.Text);
+                    sum += points;
+                }
+                catch
+                {
+                    return;
+                }
+            }
+
+
+            Label subtotal = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, 7);
+
+            subtotal.Text = sum.ToString();
+
+            Label bonus = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, 8);
+
+            bonus.Text = sum >= 63 ? "50" : "0";
+        }
+
+        private void CalculateTotal()
+        {
+            int sum = 0;
+            for (int i = 7; i <= 17; i++)
+            {
+                Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, i);
+
+                int points = 0;
+                try
+                {
+                    points = Convert.ToInt32(myLabel.Text);
+                    sum += points;
+                }
+                catch
+                {
+                    return;
+                }
+            }
+            Label total = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, 18);
+
+            total.Text = sum.ToString();
+
+        }
+
+        private void CrossOutHandler(int row)
+        {
+            rowToCrossOut = row;
+
+            textBoxStatus.Text = "Do you want to cross out the current point field?";
+
+            ToggleGameBoardComponents();
+
+            buttonCrossOutNo.Visible = true;
+            buttonCrossOutYes.Visible = true;
+        }
+
+        private void ToggleGameBoardComponents()
+        {
+            tableScoreBoard.Enabled = !tableScoreBoard.Enabled;
+            buttonThrowDice.Enabled = !buttonThrowDice.Enabled;
+            foreach (var pictureBox in pictureBoxDiceList)
+            {
+                pictureBox.Enabled = !pictureBox.Enabled;
+            }
+        }
 
         private void PointField_Click(object sender, EventArgs e)
         {
@@ -165,6 +244,11 @@ namespace Projekt3Yatzy
                 int row = tableScoreBoard.GetRow((Control)sender);
 
                 Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, row);
+
+                if (myLabel.Text != "-") // todo ändra om default-texten är ändrad
+                {
+                    return;
+                }
 
                 var chosenDice = DiceValidationUtils.GetChosenDice(diceArray);
 
@@ -229,6 +313,12 @@ namespace Projekt3Yatzy
                 Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, row);
 
                 myLabel.Text = "50";
+
+                CalculateTotal();
+            }
+            else
+            {
+                CrossOutHandler(row);
             }
         }
 
@@ -237,6 +327,8 @@ namespace Projekt3Yatzy
             Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, row);
 
             myLabel.Text = DiceValidationUtils.CalculatePoints(diceArray).ToString();
+
+            CalculateTotal();
         }
 
         private void CheckIfFullHouse(Dice[] chosenDice, int row)
@@ -250,6 +342,12 @@ namespace Projekt3Yatzy
                 Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, row);
 
                 myLabel.Text = DiceValidationUtils.CalculatePoints(chosenDice).ToString();
+
+                CalculateTotal();
+            }
+            else
+            {
+                CrossOutHandler(row);
             }
         }
 
@@ -264,6 +362,12 @@ namespace Projekt3Yatzy
                 Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, row);
 
                 myLabel.Text = DiceValidationUtils.CalculatePoints(chosenDice).ToString();
+
+                CalculateTotal();
+            }
+            else
+            {
+                CrossOutHandler(row);
             }
 
         }
@@ -288,6 +392,12 @@ namespace Projekt3Yatzy
                     myLabel.Text = DiceValidationUtils.CalculatePoints(sortedDice).ToString();
 
                 }
+
+                CalculateTotal();
+            }
+            else
+            {
+                CrossOutHandler(row);
             }
         }
 
@@ -302,11 +412,43 @@ namespace Projekt3Yatzy
                 Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, row);
 
                 myLabel.Text = sum.ToString();
+                CalculateTotal();
             }
             else
             {
-                textBoxStatus.Text = "staaph";
+                CrossOutHandler(row);
             }
+
+        }
+
+        private void buttonCrossOutYes_Click(object sender, EventArgs e)
+        {
+
+            Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, rowToCrossOut);
+
+            myLabel.Text = "0";
+
+            ToggleGameBoardComponents();
+            ToggleCrossOutButtons();
+
+            textBoxStatus.Text = "Well, someone has to lose...";
+
+
+
+        }
+
+        private void buttonCrossOutNo_Click(object sender, EventArgs e)
+        {
+            ToggleGameBoardComponents();
+            ToggleCrossOutButtons();
+
+            textBoxStatus.Text = "Please, make a better move then...";
+        }
+
+        private void ToggleCrossOutButtons()
+        {
+            buttonCrossOutNo.Visible = !buttonCrossOutNo.Visible;
+            buttonCrossOutYes.Visible = !buttonCrossOutYes.Visible;
         }
     }
 }
