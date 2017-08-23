@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace Projekt3Yatzy
 {
-    public class PlayerGameBoard
+    public class GameBoardJsonObject
     {
         public string Command { get; set; }
-        public string Name { get; set; }
-        public int PlayerId { get; set; }
-        public List<PointField> PointList { get; set; }
-        
+        public List<PlayerGameBoard> ListOfGameBoards { get; set; }
+        public int CurrentPlayer { get; set; }
+        public string Version { get; set; }
+
+
     }
 }

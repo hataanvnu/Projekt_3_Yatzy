@@ -60,6 +60,7 @@
     <Compile Include="FormGameBoard.Designer.cs">
       <DependentUpon>FormGameBoard.cs</DependentUpon>
     </Compile>
+    <Compile Include="GameBoardJsonObject.cs" />
     <Compile Include="PlayerGameBoard.cs" />
     <Compile Include="PointField.cs" />
     <Compile Include="Program.cs" />
