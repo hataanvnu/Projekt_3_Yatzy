@@ -10,25 +10,28 @@ using System.Windows.Forms;
 
 namespace Projekt3Yatzy
 {
-    public partial class Form1 : Form
+    public partial class FormStartPage : Form
     {
-        public Form1()
+        public FormStartPage()
         {
             InitializeComponent();
         }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        private void buttonStartGame_Click(object sender, EventArgs e)
         {
-            
-        }
-        void tableLayoutPanel1_CellPaint(object sender, TableLayoutCellPaintEventArgs e)
-        {
-            if (e.Row == 0 || e.Row == 2)
+            if (textBoxEnterYourName.Text == "todo") // todo om username redan finns i current game
             {
-                Graphics g = e.Graphics;
-                Rectangle r = e.CellBounds;
-                g.FillRectangle(Brushes.Blue, r);
+                labelUserNameTaken.Visible = true;
             }
+            else
+            {
+                textBoxEnterYourName.Enabled = false;
+                labelWaitingForPlayer.Visible = true;
+                buttonStartGame.Enabled = false;
+                labelUserNameTaken.Visible = false;
+
+            }
+
         }
     }
 }
