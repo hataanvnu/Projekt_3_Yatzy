@@ -62,11 +62,11 @@ namespace Projekt3Yatzy
             ToggleGameBoardComponents(false);
 
             this.gameBoardProtocol = gameBoardProtocol;
-            if (gameBoardProtocol.CurrentPlayer==3)
-            {
-                ToggleGameBoardComponents();
-            }
             CurrentPlayer = gameBoardProtocol.CurrentPlayer;
+            if (gameBoardProtocol.CurrentPlayer==PlayerId)
+            {
+                ToggleGameBoardComponents(true);
+            }
             for (int col = 0; col < gameBoardProtocol.ListOfGameBoards.Count; col++)
             {
 
@@ -208,7 +208,7 @@ namespace Projekt3Yatzy
         {
             gameBoardProtocol.ListOfGameBoards[CurrentPlayer-1].PointArray[row].Point = points.ToString();
             gameBoardProtocol.ListOfGameBoards[CurrentPlayer-1].PointArray[row].IsUsed = true;
-
+            gameBoardProtocol.Command = "Next turn";
             SendProtocolToServer();
         }
 
