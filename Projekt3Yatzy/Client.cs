@@ -17,11 +17,12 @@ namespace Projekt3Yatzy
         public TcpClient TcpClient { get; set; }
         public FormGameBoard MyGameBoard { get; set; }
         public string Name { get; set; }
+        FormStartPage startPage;
 
-        public Client(string name)
+        public Client(string name,FormStartPage startPage)
         {
             Name = name;
-
+            this.startPage = startPage;
         }
 
         public void Start()
@@ -58,7 +59,10 @@ namespace Projekt3Yatzy
 
                     else if (gameBoard.Command=="Start game")
                     {
-                        Application.Run(new FormGameBoard(this,gameBoard.PlayerId));
+                        //Application.Run(new FormGameBoard(this,gameBoard.PlayerId));
+                        var tmp = new FormGameBoard(this, gameBoard.PlayerId);
+                        startPage.Invoke(new Action(tmp.Show));
+                        
                     }               
                 }
             }
@@ -76,9 +80,7 @@ namespace Projekt3Yatzy
 
                 NetworkStream n = TcpClient.GetStream();
 
-
-                //Skicka json efter din tur
-                //message = Console.ReadLine();
+                
                 BinaryWriter w = new BinaryWriter(n);
                 w.Write(message);
                 //w.Flush();
@@ -90,11 +92,7 @@ namespace Projekt3Yatzy
             {
                 Console.WriteLine(ex.Message);
             }
-            //finally
-            //{
-
-            //    TcpClient.Close();
-            //}
+    
         }
     }
 }

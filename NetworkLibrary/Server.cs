@@ -37,7 +37,7 @@ namespace NetworkLibrary
                     Thread clientThread = new Thread(newClient.Run);
                     clientThread.Start();
 
-                    if (clients.Count() == 2)
+                    if (clients.Count() == 4)
                     {
                         StartGame();
                     }
@@ -88,7 +88,7 @@ namespace NetworkLibrary
             {
 
                 turnCounter++;
-                jsonobject.CurrentPlayer = (turnCounter % 4) + 1; //todo modulus
+                jsonobject.CurrentPlayer = (turnCounter % clients.Count()) + 1; //todo modulus
 
             }
 
