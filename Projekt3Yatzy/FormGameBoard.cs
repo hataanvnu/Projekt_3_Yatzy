@@ -20,6 +20,8 @@ namespace Projekt3Yatzy
 
         Dice[] diceArray = new Dice[5];
 
+        public int PlayerId { get; set; }
+
         int throwCounter = 0;
 
         int CurrentPlayer = 4;
@@ -58,6 +60,14 @@ namespace Projekt3Yatzy
 
         public void UpdateFormGameBoard(GameBoardJsonObject gameBoardProtocol)
         {
+            ToggleGameBoardComponents(false);
+
+            this.gameBoardProtocol = gameBoardProtocol;
+            if (gameBoardProtocol.CurrentPlayer==3)
+            {
+                ToggleGameBoardComponents();
+            }
+            CurrentPlayer = gameBoardProtocol.CurrentPlayer;
             for (int col = 0; col < gameBoardProtocol.ListOfGameBoards.Count; col++)
             {
 
@@ -282,6 +292,16 @@ namespace Projekt3Yatzy
             foreach (var pictureBox in pictureBoxDiceList)
             {
                 pictureBox.Enabled = !pictureBox.Enabled;
+            }
+        }
+
+        private void ToggleGameBoardComponents(bool enabled)
+        {
+            tableScoreBoard.Enabled = enabled;
+            buttonThrowDice.Enabled = enabled;
+            foreach (var pictureBox in pictureBoxDiceList)
+            {
+                pictureBox.Enabled = enabled;
             }
         }
 

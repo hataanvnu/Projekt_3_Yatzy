@@ -26,5 +26,10 @@ namespace ProtocolUtils
             CurrentPlayer = 1;
             Version = "1.0";
         }
+
+        public GameBoardJsonObject()
+        {
+
+        }
     }
 }

@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Projekt3Yatzy
 {
@@ -19,6 +20,7 @@ namespace Projekt3Yatzy
         public Client(FormGameBoard myGameBoard)
         {
             MyGameBoard = myGameBoard;
+
         }
 
         public void Start()
@@ -47,11 +49,19 @@ namespace Projekt3Yatzy
 
                     //todo uppdatera spelplan efter json data kommer in
                     var gameBoard = JsonConvert.DeserializeObject<GameBoardJsonObject>(message);
-
+                    if (gameBoard.Command=="Next turn")
+                    {
                     MyGameBoard.UpdateFormGameBoard(gameBoard);
 
-                    //message = new BinaryReader(n).ReadString();
-                    //Console.WriteLine("Other: " + message);
+                    }
+
+                    else if (gameBoard.Command=="Start game")
+                    {
+                        Application.Run(new FormGameBoard());
+
+                    }
+
+                   
                 }
             }
             catch (Exception ex)

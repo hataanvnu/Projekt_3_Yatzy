@@ -15,6 +15,8 @@ namespace NetworkLibrary
     public class Server
     {
         List<ClientHandler> clients = new List<ClientHandler>();
+        int turnCounter=0;
+
 
         public void Run()
         {
@@ -34,6 +36,11 @@ namespace NetworkLibrary
 
                     Thread clientThread = new Thread(newClient.Run);
                     clientThread.Start();
+
+                    if (clients.Count()==4)
+                    {
+                        StartGame();
+                    }
                 }
             }
             catch (Exception ex)
@@ -44,6 +51,23 @@ namespace NetworkLibrary
             {
                 if (listener != null)
                     listener.Stop();
+            }
+
+        }
+
+        private void StartGame()
+        {
+            var startGameCommand = new GameBoardJsonObject();
+            startGameCommand.Command = "Start game";
+
+            string jsonToSend = JsonConvert.SerializeObject(startGameCommand);
+
+            foreach (ClientHandler tmpClient in clients)
+            {
+                
+                NetworkStream n = tmpClient.TcpClient.GetStream();
+                BinaryWriter w = new BinaryWriter(n);
+                w.Write(jsonToSend);
             }
 
         }
@@ -60,10 +84,11 @@ namespace NetworkLibrary
             //Packa upp json
             var jsonobject = JsonConvert.DeserializeObject<GameBoardJsonObject>(json);
 
-
-            if (jsonobject.Command=="Next Turn")
+            if (jsonobject.Command=="Next turn")
             {
-                jsonobject.CurrentPlayer++; //todo modulus
+
+                turnCounter++;
+                jsonobject.CurrentPlayer = (turnCounter % 4) +1; //todo modulus
                 
             }
 
@@ -71,12 +96,12 @@ namespace NetworkLibrary
            
             foreach (ClientHandler tmpClient in clients)
             {
-                if (tmpClient!=client)
-                {
+                //if (tmpClient!=client)
+                //{
                     NetworkStream n = tmpClient.TcpClient.GetStream();
                     BinaryWriter w = new BinaryWriter(n);
                     w.Write(jsonToSend);
-                }
+               // }
 
 
             }
