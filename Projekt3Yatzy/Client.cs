@@ -26,7 +26,7 @@ namespace Projekt3Yatzy
 
         public void Start()
         {
-            TcpClient = new TcpClient("192.168.25.94", 5000);
+            TcpClient = new TcpClient("192.168.25.83", 5000);
 
             //Thread listenerThread = new Thread(Send);
             //listenerThread.Start();
@@ -66,6 +66,7 @@ namespace Projekt3Yatzy
             {
                 Console.WriteLine(ex.Message);
             }
+
         }
 
         public void Send(string message)

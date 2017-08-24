@@ -43,6 +43,7 @@ namespace Projekt3Yatzy
 
         }
 
+
         private void label1_Click(object sender, EventArgs e)
         {
             labelPlayers.BackColor = Color.Red;
