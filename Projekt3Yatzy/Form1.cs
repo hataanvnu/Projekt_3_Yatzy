@@ -21,7 +21,7 @@ namespace Projekt3Yatzy
         {
             if (textBoxEnterYourName.Text == "todo") // todo om username redan finns i current game
             {
-                labelUserNameTaken.Visible = true;
+                labelUserNameTaken.Visible = true; //Sure, lets do this...
             }
             else
             {
