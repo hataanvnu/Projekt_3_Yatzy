@@ -106,13 +106,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="images\dice-1294902_960_720.png" />
-    <Content Include="images\dice1.png" />
-    <Content Include="images\dice2.png" />
-    <Content Include="images\noun_1186617_cc.png" />
-    <Content Include="images\noun_1186618_cc.png" />
-    <Content Include="images\noun_1186619_cc.png" />
-    <Content Include="images\noun_1186620_cc.png" />
+    <Content Include="images\dice1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\dice2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\dice3.png" />
+    <Content Include="images\dice4.png" />
+    <Content Include="images\dice5.png" />
+    <Content Include="images\dice6.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

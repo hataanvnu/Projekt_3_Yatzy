@@ -22,21 +22,32 @@ namespace Projekt3Yatzy
 
         private void buttonStartGame_Click(object sender, EventArgs e)
         {
-            MyClient = new Client(textBoxEnterYourName.Text,this);
-
-            Thread clientThread = new Thread(MyClient.Start);
-            clientThread.Start();
-
-            if (textBoxEnterYourName.Text == "todo") // todo om username redan finns i current game
+            try
             {
-                labelUserNameTaken.Visible = true; //Sure, lets do this...
+
+                MyClient = new Client(textBoxEnterYourName.Text, this);
+
+                Thread clientThread = new Thread(MyClient.Start);
+                clientThread.Start();
+
+                if (textBoxEnterYourName.Text == "todo") // todo om username redan finns i current game
+                {
+                    labelUserNameTaken.Visible = true; //Sure, lets do this...
+                }
+                else
+                {
+                    textBoxEnterYourName.Enabled = false;
+                    labelWaitingForPlayer.Visible = true;
+                    buttonStartGame.Enabled = false;
+                    labelUserNameTaken.Visible = false;
+
+                }
             }
-            else
+            catch (Exception)
             {
-                textBoxEnterYourName.Enabled = false;
-                labelWaitingForPlayer.Visible = true;
-                buttonStartGame.Enabled = false;
-                labelUserNameTaken.Visible = false;
+
+                labelWaitingForPlayer.Text="No game running";
+                labelWaitingForPlayer.Visible=true;
 
             }
 

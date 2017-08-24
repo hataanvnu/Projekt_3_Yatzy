@@ -40,6 +40,7 @@ namespace NetworkLibrary
                     if (clients.Count() == 2)
                     {
                         StartGame();
+                        break;
                     }
                 }
             }
@@ -84,12 +85,24 @@ namespace NetworkLibrary
             //Packa upp json
             var jsonobject = JsonConvert.DeserializeObject<GameBoardJsonObject>(json);
 
+
+
             if (jsonobject.Command == "Next turn")
             {
 
                 turnCounter++;
                 jsonobject.CurrentPlayer = (turnCounter % clients.Count()) + 1; //todo modulus
 
+            }
+
+            if (jsonobject.Command == "Final turn" && jsonobject.CurrentPlayer == clients.Count)
+            {
+                Console.WriteLine("Someone won");
+                jsonobject.PlayerId = jsonobject.ListOfGameBoards.Max(x => Convert.ToInt32(x.PointArray[18].Point));
+            }
+            else
+            {
+                jsonobject.Command = "Next turn";
             }
 
             string jsonToSend = JsonConvert.SerializeObject(jsonobject);

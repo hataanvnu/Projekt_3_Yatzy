@@ -24,23 +24,23 @@ namespace NetworkLibrary
         {
             NetworkStream n;
 
-            while (true) //Todo något condition
+            try
             {
-                try
+                while (true) //Todo något condition
                 {
                     n = TcpClient.GetStream();
                     string jsonString = new BinaryReader(n).ReadString();
-                    
+
 
                     //Console.WriteLine(jsonString);
                     //Göra saker, Skicka data
                     MyServer.SendData(this, jsonString);
 
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
 
             //MyServer.DisconnectClient(this);

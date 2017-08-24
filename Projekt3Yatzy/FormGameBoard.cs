@@ -29,9 +29,9 @@ namespace Projekt3Yatzy
         int rowToCrossOut = 0;
 
         GameBoardJsonObject gameBoardProtocol;
-        List<string> testList = new List<string>{ "Petter", "Johan", "Micke", "Fanny" };
+        List<string> testList = new List<string> { "Petter", "Johan", "Micke", "Fanny" };
 
-        public FormGameBoard(Client myClient,int playerId)
+        public FormGameBoard(Client myClient, int playerId)
         {
             InitializeComponent();
 
@@ -63,21 +63,37 @@ namespace Projekt3Yatzy
             ToggleGameBoardComponents(false);
 
             this.gameBoardProtocol = gameBoardProtocol;
-            CurrentPlayer = gameBoardProtocol.CurrentPlayer;
-            if (gameBoardProtocol.CurrentPlayer==PlayerId)
+            if (gameBoardProtocol.Command == "Final turn")
+            {
+                if (gameBoardProtocol.CurrentPlayer == PlayerId)
+                {
+                    MessageBox.Show("You win!");
+                }
+                else
+                {
+                    MessageBox.Show("You lose!");
+                }
+            }
+            else
+            {
+                CurrentPlayer = gameBoardProtocol.CurrentPlayer;
+            }
+
+
+            if (gameBoardProtocol.CurrentPlayer == PlayerId)
             {
                 ToggleGameBoardComponents(true);
             }
             for (int col = 0; col < gameBoardProtocol.ListOfGameBoards.Count; col++)
             {
 
-            //Sätter namn
-                Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(col+1, 0);
+                //Sätter namn
+                Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(col + 1, 0);
                 myLabel.Text = gameBoardProtocol.ListOfGameBoards[col].Name;
 
-                for (int row = 1; row < gameBoardProtocol.ListOfGameBoards[col].PointArray.Length; row++)
+                for (int row = 0; row < gameBoardProtocol.ListOfGameBoards[col].PointArray.Length; row++)
                 {
-                    myLabel= (Label)tableScoreBoard.GetControlFromPosition(col + 1, row);
+                    myLabel = (Label)tableScoreBoard.GetControlFromPosition(col + 1, row+1);
                     myLabel.Text = gameBoardProtocol.ListOfGameBoards[col].PointArray[row].Point;
                 }
 
@@ -188,7 +204,7 @@ namespace Projekt3Yatzy
                     // Kolla om bonusdags
                     CalculateSubtotalAndBonus();
                     CalculateTotal();
-                    UpdateProtocolGameBoard(row, points);
+                    UpdateProtocolGameBoard(row-1, points);
 
                     // Todo: resetta variabler
                     //InitNewTurn();
@@ -207,8 +223,8 @@ namespace Projekt3Yatzy
 
         private void UpdateProtocolGameBoard(int row, int points)
         {
-            gameBoardProtocol.ListOfGameBoards[CurrentPlayer-1].PointArray[row].Point = points.ToString();
-            gameBoardProtocol.ListOfGameBoards[CurrentPlayer-1].PointArray[row].IsUsed = true;
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[row].Point = points.ToString();
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[row].IsUsed = true;
             gameBoardProtocol.Command = "Next turn";
             SendProtocolToServer();
         }
@@ -232,27 +248,29 @@ namespace Projekt3Yatzy
                 {
                     points = Convert.ToInt32(myLabel.Text);
                     sum += points;
-                    
+
                 }
                 catch
                 {
-                    return;
+                    //return;
                 }
             }
 
+            int subtotalLabelRow = 7;
+            int bonusLabelRow = 8;
 
-            Label subtotal = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, 7);
+            Label subtotal = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, subtotalLabelRow);
 
             subtotal.Text = sum.ToString();
-            gameBoardProtocol.ListOfGameBoards[CurrentPlayer-1].PointArray[7].Point = sum.ToString();
-            gameBoardProtocol.ListOfGameBoards[CurrentPlayer-1].PointArray[7].IsUsed = true;
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[subtotalLabelRow - 1].Point = sum.ToString();
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[subtotalLabelRow - 1].IsUsed = true;
 
-            Label bonus = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, 8);
+            Label bonus = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, bonusLabelRow);
 
             bonus.Text = sum >= 63 ? "50" : "0";
 
-            gameBoardProtocol.ListOfGameBoards[CurrentPlayer-1].PointArray[8].Point = bonus.Text;
-            gameBoardProtocol.ListOfGameBoards[CurrentPlayer-1].PointArray[8].IsUsed = true;
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[bonusLabelRow - 1].Point = bonus.Text;
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[bonusLabelRow - 1].IsUsed = true;
         }
 
         private void CalculateTotal()
@@ -270,7 +288,7 @@ namespace Projekt3Yatzy
                 }
                 catch
                 {
-                    return;
+                    //return;
                 }
             }
             Label total = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, 18);
@@ -278,8 +296,11 @@ namespace Projekt3Yatzy
             total.Text = sum.ToString();
 
             int arrayCount = gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray.Length;
-            gameBoardProtocol.ListOfGameBoards[CurrentPlayer-1].PointArray[arrayCount-1].Point = sum.ToString();
-            gameBoardProtocol.ListOfGameBoards[CurrentPlayer-1].PointArray[arrayCount-1].IsUsed = true;
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[arrayCount - 1].Point = sum.ToString();
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[arrayCount - 1].IsUsed = true;
+
+            //gameBoardProtocol.Command = "Final turn";
+            //SendProtocolToServer();
 
         }
 
@@ -512,7 +533,7 @@ namespace Projekt3Yatzy
 
                 UpdateProtocolGameBoard(row, sum);
 
-                
+
                 CalculateTotal();
             }
             else

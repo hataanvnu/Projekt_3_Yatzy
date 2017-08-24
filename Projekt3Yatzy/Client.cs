@@ -19,7 +19,7 @@ namespace Projekt3Yatzy
         public string Name { get; set; }
         FormStartPage startPage;
 
-        public Client(string name,FormStartPage startPage)
+        public Client(string name, FormStartPage startPage)
         {
             Name = name;
             this.startPage = startPage;
@@ -27,16 +27,19 @@ namespace Projekt3Yatzy
 
         public void Start()
         {
-            TcpClient = new TcpClient("192.168.25.94", 5000);
+            try
+            {
+                TcpClient = new TcpClient("192.168.25.94", 5000);
 
-            //Thread listenerThread = new Thread(Send);
-            //listenerThread.Start();
+                Thread senderThread = new Thread(Listen);
+                senderThread.Start();
 
-            Thread senderThread = new Thread(Listen);
-            senderThread.Start();
+            }
+            catch (Exception)
+            {
+               // startPage.get
 
-            //senderThread.Join();
-            //listenerThread.Join();
+            }
         }
 
         private void Listen()
@@ -51,19 +54,26 @@ namespace Projekt3Yatzy
 
                     //todo uppdatera spelplan efter json data kommer in
                     var gameBoard = JsonConvert.DeserializeObject<GameBoardJsonObject>(message);
-                    if (gameBoard.Command=="Next turn")
+
+                    if (gameBoard.Command=="Final turn")
                     {
-                    MyGameBoard.UpdateFormGameBoard(gameBoard);
+                        MyGameBoard.UpdateFormGameBoard(gameBoard);
 
                     }
 
-                    else if (gameBoard.Command=="Start game")
+                    else if (gameBoard.Command == "Next turn")
+                    {
+                        MyGameBoard.UpdateFormGameBoard(gameBoard);
+
+                    }
+
+                    else if (gameBoard.Command == "Start game")
                     {
                         //Application.Run(new FormGameBoard(this,gameBoard.PlayerId));
                         var tmp = new FormGameBoard(this, gameBoard.PlayerId);
                         startPage.Invoke(new Action(tmp.Show));
-                        
-                    }               
+
+                    }
                 }
             }
             catch (Exception ex)
@@ -80,11 +90,11 @@ namespace Projekt3Yatzy
 
                 NetworkStream n = TcpClient.GetStream();
 
-                
+
                 BinaryWriter w = new BinaryWriter(n);
                 w.Write(message);
                 //w.Flush();
-                
+
 
 
             }
@@ -92,7 +102,7 @@ namespace Projekt3Yatzy
             {
                 Console.WriteLine(ex.Message);
             }
-    
+
         }
     }
 }
