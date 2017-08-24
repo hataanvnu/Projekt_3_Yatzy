@@ -22,7 +22,7 @@ namespace Projekt3Yatzy
 
         private void buttonStartGame_Click(object sender, EventArgs e)
         {
-            MyClient = new Client();
+            MyClient = new Client(textBoxEnterYourName.Text);
 
             Thread clientThread = new Thread(MyClient.Start);
             clientThread.Start();

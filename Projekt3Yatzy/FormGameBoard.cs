@@ -24,16 +24,18 @@ namespace Projekt3Yatzy
 
         int throwCounter = 0;
 
-        int CurrentPlayer = 4;
+        int CurrentPlayer = 1;
 
         int rowToCrossOut = 0;
 
         GameBoardJsonObject gameBoardProtocol;
         List<string> testList = new List<string>{ "Petter", "Johan", "Micke", "Fanny" };
 
-        public FormGameBoard(Client myClient)
+        public FormGameBoard(Client myClient,int playerId)
         {
             InitializeComponent();
+
+            PlayerId = playerId;
             gameBoardProtocol = new GameBoardJsonObject(testList);
 
             MyClient = myClient;

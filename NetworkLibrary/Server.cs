@@ -15,7 +15,7 @@ namespace NetworkLibrary
     public class Server
     {
         List<ClientHandler> clients = new List<ClientHandler>();
-        int turnCounter=0;
+        int turnCounter = 0;
 
 
         public void Run()
@@ -37,7 +37,7 @@ namespace NetworkLibrary
                     Thread clientThread = new Thread(newClient.Run);
                     clientThread.Start();
 
-                    if (clients.Count()==4)
+                    if (clients.Count() == 4)
                     {
                         StartGame();
                     }
@@ -60,16 +60,16 @@ namespace NetworkLibrary
             var startGameCommand = new GameBoardJsonObject();
             startGameCommand.Command = "Start game";
 
-            string jsonToSend = JsonConvert.SerializeObject(startGameCommand);
-
-            foreach (ClientHandler tmpClient in clients)
+            for (int i = 0; i < clients.Count; i++)
             {
-                
-                NetworkStream n = tmpClient.TcpClient.GetStream();
+                startGameCommand.PlayerId = i + 1;
+
+                string jsonToSend = JsonConvert.SerializeObject(startGameCommand);
+                NetworkStream n = clients[i].TcpClient.GetStream();
                 BinaryWriter w = new BinaryWriter(n);
                 w.Write(jsonToSend);
             }
-
+           
         }
 
         internal void DisconnectClient(ClientHandler clientHandler)
@@ -84,24 +84,24 @@ namespace NetworkLibrary
             //Packa upp json
             var jsonobject = JsonConvert.DeserializeObject<GameBoardJsonObject>(json);
 
-            if (jsonobject.Command=="Next turn")
+            if (jsonobject.Command == "Next turn")
             {
 
                 turnCounter++;
-                jsonobject.CurrentPlayer = (turnCounter % 4) +1; //todo modulus
-                
+                jsonobject.CurrentPlayer = (turnCounter % 4) + 1; //todo modulus
+
             }
 
             string jsonToSend = JsonConvert.SerializeObject(jsonobject);
-           
+
             foreach (ClientHandler tmpClient in clients)
             {
                 //if (tmpClient!=client)
                 //{
-                    NetworkStream n = tmpClient.TcpClient.GetStream();
-                    BinaryWriter w = new BinaryWriter(n);
-                    w.Write(jsonToSend);
-               // }
+                NetworkStream n = tmpClient.TcpClient.GetStream();
+                BinaryWriter w = new BinaryWriter(n);
+                w.Write(jsonToSend);
+                // }
 
 
             }

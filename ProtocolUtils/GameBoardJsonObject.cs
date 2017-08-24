@@ -13,6 +13,7 @@ namespace ProtocolUtils
         public int CurrentPlayer { get; set; }
         public string Version { get; set; }
         public List<string> Names { get; set; }
+        public int PlayerId { get; set; }
 
         public GameBoardJsonObject(List<string> names)
         {
