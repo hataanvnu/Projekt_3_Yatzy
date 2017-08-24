@@ -232,6 +232,7 @@ namespace Projekt3Yatzy
                 {
                     points = Convert.ToInt32(myLabel.Text);
                     sum += points;
+                    
                 }
                 catch
                 {
@@ -243,10 +244,15 @@ namespace Projekt3Yatzy
             Label subtotal = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, 7);
 
             subtotal.Text = sum.ToString();
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer].PointArray[7].Point = sum.ToString();
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer].PointArray[7].IsUsed = true;
 
             Label bonus = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, 8);
 
             bonus.Text = sum >= 63 ? "50" : "0";
+
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer].PointArray[8].Point = bonus.Text;
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer].PointArray[8].IsUsed = true;
         }
 
         private void CalculateTotal()
@@ -270,6 +276,9 @@ namespace Projekt3Yatzy
             Label total = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, 18);
 
             total.Text = sum.ToString();
+
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer].PointArray[18].Point = sum.ToString();
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer].PointArray[18].IsUsed = true;
 
         }
 

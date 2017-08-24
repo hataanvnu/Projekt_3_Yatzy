@@ -37,7 +37,7 @@ namespace NetworkLibrary
                     Thread clientThread = new Thread(newClient.Run);
                     clientThread.Start();
 
-                    if (clients.Count() == 4)
+                    if (clients.Count() == 2)
                     {
                         StartGame();
                     }
