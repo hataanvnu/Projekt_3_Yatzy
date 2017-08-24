@@ -52,11 +52,11 @@
     <Compile Include="Dice.cs" />
     <Compile Include="DiceUtils.cs" />
     <Compile Include="DiceValidationUtils.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="FormStartPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="FormStartPage.Designer.cs">
+      <DependentUpon>FormStartPage.cs</DependentUpon>
     </Compile>
     <Compile Include="FormGameBoard.cs">
       <SubType>Form</SubType>
@@ -66,8 +66,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="FormStartPage.resx">
+      <DependentUpon>FormStartPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormGameBoard.resx">
       <DependentUpon>FormGameBoard.cs</DependentUpon>

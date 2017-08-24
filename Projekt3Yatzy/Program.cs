@@ -19,7 +19,7 @@ namespace Projekt3Yatzy
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             
-            Application.Run(new FormGameBoard());
+            Application.Run(new FormStartPage());
 
             
         }
