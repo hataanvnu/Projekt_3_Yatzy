@@ -185,14 +185,14 @@ namespace Projekt3Yatzy
                     Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, row);
                     myLabel.Text = points.ToString();
 
+                    // Kolla om bonusdags
+                    CalculateSubtotalAndBonus();
+                    CalculateTotal();
                     UpdateProtocolGameBoard(row, points);
 
                     // Todo: resetta variabler
                     //InitNewTurn();
 
-                    // Kolla om bonusdags
-                    CalculateSubtotalAndBonus();
-                    CalculateTotal();
                 }
                 else
                 {
@@ -244,15 +244,15 @@ namespace Projekt3Yatzy
             Label subtotal = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, 7);
 
             subtotal.Text = sum.ToString();
-            gameBoardProtocol.ListOfGameBoards[CurrentPlayer].PointArray[7].Point = sum.ToString();
-            gameBoardProtocol.ListOfGameBoards[CurrentPlayer].PointArray[7].IsUsed = true;
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer-1].PointArray[7].Point = sum.ToString();
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer-1].PointArray[7].IsUsed = true;
 
             Label bonus = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, 8);
 
             bonus.Text = sum >= 63 ? "50" : "0";
 
-            gameBoardProtocol.ListOfGameBoards[CurrentPlayer].PointArray[8].Point = bonus.Text;
-            gameBoardProtocol.ListOfGameBoards[CurrentPlayer].PointArray[8].IsUsed = true;
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer-1].PointArray[8].Point = bonus.Text;
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer-1].PointArray[8].IsUsed = true;
         }
 
         private void CalculateTotal()
@@ -277,8 +277,9 @@ namespace Projekt3Yatzy
 
             total.Text = sum.ToString();
 
-            gameBoardProtocol.ListOfGameBoards[CurrentPlayer].PointArray[18].Point = sum.ToString();
-            gameBoardProtocol.ListOfGameBoards[CurrentPlayer].PointArray[18].IsUsed = true;
+            int arrayCount = gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray.Length;
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer-1].PointArray[arrayCount-1].Point = sum.ToString();
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer-1].PointArray[arrayCount-1].IsUsed = true;
 
         }
 
@@ -528,11 +529,17 @@ namespace Projekt3Yatzy
 
             myLabel.Text = "0";
 
+            //gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[rowToCrossOut].Point = myLabel.Text;
+            //gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[rowToCrossOut].IsUsed = true;
+
             ToggleGameBoardComponents();
             ToggleCrossOutButtons();
 
             textBoxStatus.Text = "Well, someone has to lose...";
 
+            CalculateSubtotalAndBonus();
+            CalculateTotal();
+            UpdateProtocolGameBoard(rowToCrossOut, 0);
 
 
         }
