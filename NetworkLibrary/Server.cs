@@ -98,7 +98,7 @@ namespace NetworkLibrary
             if (jsonobject.Command == "Final turn" && jsonobject.CurrentPlayer == clients.Count)
             {
                 Console.WriteLine("Someone won");
-                jsonobject.PlayerId = jsonobject.ListOfGameBoards.Max(x => Convert.ToInt32(x.PointArray[18].Point));
+                jsonobject.PlayerId = jsonobject.ListOfGameBoards.Max(x => Convert.ToInt32(x.PointArray[17].Point));
             }
             else
             {

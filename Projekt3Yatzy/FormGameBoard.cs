@@ -29,7 +29,7 @@ namespace Projekt3Yatzy
         int rowToCrossOut = 0;
 
         GameBoardJsonObject gameBoardProtocol;
-        List<string> testList = new List<string> { "Petter", "Johan", "Micke", "Fanny" };
+        List<string> testList = new List<string> { "Petter", "Johan" };
 
         public FormGameBoard(Client myClient, int playerId)
         {
@@ -67,11 +67,11 @@ namespace Projekt3Yatzy
             {
                 if (gameBoardProtocol.CurrentPlayer == PlayerId)
                 {
-                    MessageBox.Show("You win!");
+                    MessageBox.Show($"You win!");
                 }
                 else
                 {
-                    MessageBox.Show("You lose!");
+                    MessageBox.Show("You lose! Are you in the Java class?!?!!?");
                 }
             }
             else
@@ -204,8 +204,8 @@ namespace Projekt3Yatzy
                     // Kolla om bonusdags
                     CalculateSubtotalAndBonus();
                     CalculateTotal();
-                    UpdateProtocolGameBoard(row-1, points);
-
+                    UpdateProtocolGameBoard(row, points);
+                    NextTurn();
                     // Todo: resetta variabler
                     //InitNewTurn();
 
@@ -223,8 +223,13 @@ namespace Projekt3Yatzy
 
         private void UpdateProtocolGameBoard(int row, int points)
         {
-            gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[row].Point = points.ToString();
-            gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[row].IsUsed = true;
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[row - 1].Point = points.ToString();
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[row - 1].IsUsed = true;
+            
+        }
+
+        private void NextTurn()
+        {
             gameBoardProtocol.Command = "Next turn";
             SendProtocolToServer();
         }
@@ -299,8 +304,8 @@ namespace Projekt3Yatzy
             gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[arrayCount - 1].Point = sum.ToString();
             gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[arrayCount - 1].IsUsed = true;
 
-            //gameBoardProtocol.Command = "Final turn";
-            //SendProtocolToServer();
+            gameBoardProtocol.Command = "Final turn";
+            SendProtocolToServer();
 
         }
 
@@ -414,7 +419,7 @@ namespace Projekt3Yatzy
                 myLabel.Text = "50";
 
                 UpdateProtocolGameBoard(row, 50);
-
+                NextTurn();
                 CalculateTotal();
             }
             else
@@ -432,7 +437,7 @@ namespace Projekt3Yatzy
             myLabel.Text = points.ToString();
 
             UpdateProtocolGameBoard(row, points);
-
+            NextTurn();
             CalculateTotal();
         }
 
@@ -451,7 +456,7 @@ namespace Projekt3Yatzy
                 myLabel.Text = points.ToString();
 
                 UpdateProtocolGameBoard(row, points);
-
+                NextTurn();
                 //myLabel.Text = DiceValidationUtils.CalculatePoints(chosenDice).ToString();
 
                 CalculateTotal();
@@ -479,7 +484,7 @@ namespace Projekt3Yatzy
 
                 UpdateProtocolGameBoard(row, points);
                 //myLabel.Text = DiceValidationUtils.CalculatePoints(chosenDice).ToString();
-
+                NextTurn();
                 CalculateTotal();
             }
             else
@@ -505,7 +510,7 @@ namespace Projekt3Yatzy
                 myLabel.Text = points.ToString();
 
                 UpdateProtocolGameBoard(row, points);
-
+                NextTurn();
                 //myLabel.Text = DiceValidationUtils.CalculatePoints(sortedDice).ToString();
 
 
@@ -532,7 +537,7 @@ namespace Projekt3Yatzy
                 myLabel.Text = sum.ToString();
 
                 UpdateProtocolGameBoard(row, sum);
-
+                NextTurn();
 
                 CalculateTotal();
             }
@@ -558,9 +563,10 @@ namespace Projekt3Yatzy
 
             textBoxStatus.Text = "Well, someone has to lose...";
 
+            UpdateProtocolGameBoard(rowToCrossOut, 0);
+            NextTurn();
             CalculateSubtotalAndBonus();
             CalculateTotal();
-            UpdateProtocolGameBoard(rowToCrossOut, 0);
 
 
         }
