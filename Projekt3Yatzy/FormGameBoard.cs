@@ -31,16 +31,13 @@ namespace Projekt3Yatzy
         GameBoardJsonObject gameBoardProtocol;
         List<string> testList = new List<string>{ "Petter", "Johan", "Micke", "Fanny" };
 
-        public FormGameBoard()
+        public FormGameBoard(Client myClient)
         {
             InitializeComponent();
             gameBoardProtocol = new GameBoardJsonObject(testList);
 
-            MyClient = new Client(this);
-
-            Thread clientThread = new Thread(MyClient.Start);
-            clientThread.Start();
-            
+            MyClient = myClient;
+            MyClient.MyGameBoard = this;
 
         }
 

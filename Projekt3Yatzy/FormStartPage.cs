@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,6 +13,8 @@ namespace Projekt3Yatzy
 {
     public partial class FormStartPage : Form
     {
+        public Client MyClient { get; set; }
+
         public FormStartPage()
         {
             InitializeComponent();
@@ -19,6 +22,11 @@ namespace Projekt3Yatzy
 
         private void buttonStartGame_Click(object sender, EventArgs e)
         {
+            MyClient = new Client();
+
+            Thread clientThread = new Thread(MyClient.Start);
+            clientThread.Start();
+
             if (textBoxEnterYourName.Text == "todo") // todo om username redan finns i current game
             {
                 labelUserNameTaken.Visible = true; //Sure, lets do this...

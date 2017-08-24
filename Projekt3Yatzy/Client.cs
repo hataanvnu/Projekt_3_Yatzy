@@ -17,9 +17,9 @@ namespace Projekt3Yatzy
         public TcpClient TcpClient { get; set; }
         public FormGameBoard MyGameBoard { get; set; }
 
-        public Client(FormGameBoard myGameBoard)
+        public Client()
         {
-            MyGameBoard = myGameBoard;
+           
 
         }
 
@@ -57,7 +57,7 @@ namespace Projekt3Yatzy
 
                     else if (gameBoard.Command=="Start game")
                     {
-                        Application.Run(new FormGameBoard());
+                        Application.Run(new FormGameBoard(this));
 
                     }
 
