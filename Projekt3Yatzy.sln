@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkLibrary", "NetworkLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkServer", "NetworkServer\NetworkServer.csproj", "{9E25F1E7-E492-4134-86D1-0D3E3830A004}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtocolUtils", "ProtocolUtils\ProtocolUtils.csproj", "{1479108C-9F67-467D-941F-EA634220F729}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{9E25F1E7-E492-4134-86D1-0D3E3830A004}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E25F1E7-E492-4134-86D1-0D3E3830A004}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E25F1E7-E492-4134-86D1-0D3E3830A004}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1479108C-9F67-467D-941F-EA634220F729}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1479108C-9F67-467D-941F-EA634220F729}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1479108C-9F67-467D-941F-EA634220F729}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1479108C-9F67-467D-941F-EA634220F729}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

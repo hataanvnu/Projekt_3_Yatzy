@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using ProtocolUtils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,24 +9,30 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace NetworkLibrary
+namespace Projekt3Yatzy
 {
     public class Client
     {
         public TcpClient TcpClient { get; set; }
+        public FormGameBoard MyGameBoard { get; set; }
+
+        public Client(FormGameBoard myGameBoard)
+        {
+            MyGameBoard = myGameBoard;
+        }
 
         public void Start()
         {
-            TcpClient = new TcpClient("192.168.25.80", 5000);
+            TcpClient = new TcpClient("192.168.25.122", 5000);
 
-            Thread listenerThread = new Thread(Send);
-            listenerThread.Start();
+            //Thread listenerThread = new Thread(Send);
+            //listenerThread.Start();
 
             Thread senderThread = new Thread(Listen);
             senderThread.Start();
 
-            senderThread.Join();
-            listenerThread.Join();
+            //senderThread.Join();
+            //listenerThread.Join();
         }
 
         private void Listen()
@@ -38,8 +46,9 @@ namespace NetworkLibrary
 
 
                     //todo uppdatera spelplan efter json data kommer in
+                    var gameBoard = JsonConvert.DeserializeObject<GameBoardJsonObject>(message);
 
-
+                    MyGameBoard.UpdateFormGameBoard(gameBoard);
 
                     //message = new BinaryReader(n).ReadString();
                     //Console.WriteLine("Other: " + message);
@@ -47,35 +56,36 @@ namespace NetworkLibrary
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message); 
+                Console.WriteLine(ex.Message);
             }
         }
 
-        private void Send()
+        public void Send(string message)
         {
             try
             {
-                
-                    NetworkStream n = TcpClient.GetStream();
+
+                NetworkStream n = TcpClient.GetStream();
 
 
-                    //Skicka json efter din tur
-                    //message = Console.ReadLine();
-                    //BinaryWriter w = new BinaryWriter(n);
-                    //w.Write(message);
-                    //w.Flush();
+                //Skicka json efter din tur
+                //message = Console.ReadLine();
+                BinaryWriter w = new BinaryWriter(n);
+                w.Write(message);
+                //w.Flush();
                 
+
 
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            finally
-            {
+            //finally
+            //{
 
-                TcpClient.Close();
-            }
+            //    TcpClient.Close();
+            //}
         }
     }
 }

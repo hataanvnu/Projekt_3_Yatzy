@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Projekt3Yatzy;
+using ProtocolUtils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,6 +30,7 @@ namespace NetworkLibrary
                     TcpClient c = listener.AcceptTcpClient();
                     ClientHandler newClient = new ClientHandler(c, this);
                     clients.Add(newClient);
+                    Console.WriteLine($"{clients.Count()} players have joined the server");
 
                     Thread clientThread = new Thread(newClient.Run);
                     clientThread.Start();
@@ -62,7 +63,7 @@ namespace NetworkLibrary
 
             if (jsonobject.Command=="Next Turn")
             {
-                jsonobject.CurrentPlayer++;
+                jsonobject.CurrentPlayer++; //todo modulus
                 
             }
 

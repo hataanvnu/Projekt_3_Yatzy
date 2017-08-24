@@ -12,7 +12,7 @@ namespace NetworkLibrary
     {
         public TcpClient TcpClient { get; set; }
         public Server MyServer { get; set; }
-        
+
 
         public ClientHandler(TcpClient c, Server server)
         {
@@ -22,26 +22,30 @@ namespace NetworkLibrary
 
         public void Run()
         {
-            try
+            NetworkStream n;
+
+            while (true) //Todo något condition
             {
-                while (true) //Todo något condition
+                try
                 {
-                    NetworkStream n = TcpClient.GetStream();
+                    n = TcpClient.GetStream();
                     string jsonString = new BinaryReader(n).ReadString();
+                    
+
+                    //Console.WriteLine(jsonString);
                     //Göra saker, Skicka data
                     MyServer.SendData(this, jsonString);
 
                 }
-
-                //MyServer.DisconnectClient(this);
-                //TcpClient.Close();
-
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
-            catch (Exception)
-            {
 
-                throw;
-            }
+            //MyServer.DisconnectClient(this);
+            //TcpClient.Close();
+
         }
     }
 }
