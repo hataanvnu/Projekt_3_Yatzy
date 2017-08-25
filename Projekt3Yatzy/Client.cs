@@ -29,7 +29,7 @@ namespace Projekt3Yatzy
         {
             try
             {
-                TcpClient = new TcpClient("192.168.25.94", 5000);
+                TcpClient = new TcpClient("192.168.25.122", 5000);
 
                 Thread senderThread = new Thread(Listen);
                 senderThread.Start();

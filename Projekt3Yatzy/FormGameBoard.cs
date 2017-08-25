@@ -15,6 +15,7 @@ namespace Projekt3Yatzy
 {
     public partial class FormGameBoard : Form
     {
+        #region props and fields
         public Client MyClient { get; set; }
         PictureBox[] pictureBoxDiceList = new PictureBox[5];
 
@@ -31,6 +32,9 @@ namespace Projekt3Yatzy
         GameBoardJsonObject gameBoardProtocol;
         List<string> testList = new List<string> { "Petter", "Johan" };
 
+        #endregion
+
+        #region methods start automaticly starts when the form opens
         public FormGameBoard(Client myClient, int playerId)
         {
             InitializeComponent();
@@ -43,61 +47,12 @@ namespace Projekt3Yatzy
 
         }
 
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-            labelPlayers.BackColor = Color.Red;
-        }
-
-
         private void FormGameBoard_Load(object sender, EventArgs e)
         {
             // Initialize the list of dice
             InitializeDiceList();
             UpdateFormGameBoard(gameBoardProtocol);
 
-        }
-
-        public void UpdateFormGameBoard(GameBoardJsonObject gameBoardProtocol)
-        {
-            ToggleGameBoardComponents(false);
-
-            this.gameBoardProtocol = gameBoardProtocol;
-            if (gameBoardProtocol.Command == "Final turn")
-            {
-                if (gameBoardProtocol.CurrentPlayer == PlayerId)
-                {
-                    MessageBox.Show($"You win!");
-                }
-                else
-                {
-                    MessageBox.Show("You lose! Are you in the Java class?!?!!?");
-                }
-            }
-            else
-            {
-                CurrentPlayer = gameBoardProtocol.CurrentPlayer;
-            }
-
-
-            if (gameBoardProtocol.CurrentPlayer == PlayerId)
-            {
-                ToggleGameBoardComponents(true);
-            }
-            for (int col = 0; col < gameBoardProtocol.ListOfGameBoards.Count; col++)
-            {
-
-                //Sätter namn
-                Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(col + 1, 0);
-                myLabel.Text = gameBoardProtocol.ListOfGameBoards[col].Name;
-
-                for (int row = 0; row < gameBoardProtocol.ListOfGameBoards[col].PointArray.Length; row++)
-                {
-                    myLabel = (Label)tableScoreBoard.GetControlFromPosition(col + 1, row+1);
-                    myLabel.Text = gameBoardProtocol.ListOfGameBoards[col].PointArray[row].Point;
-                }
-
-            }
         }
 
         private void InitializeDiceList()
@@ -108,6 +63,10 @@ namespace Projekt3Yatzy
             pictureBoxDiceList[3] = pictureBoxDice3;
             pictureBoxDiceList[4] = pictureBoxDice4;
         }
+        #endregion
+        
+
+        #region Dice picture box logic
 
         private void buttonThrowDice_Click(object sender, EventArgs e)
         {
@@ -164,60 +123,48 @@ namespace Projekt3Yatzy
         {
             ToggleEnabledDice(4);
         }
+        #endregion
 
-        private void ToggleEnabledDice(int index)
+        #region protocol and server stuff
+        public void UpdateFormGameBoard(GameBoardJsonObject gameBoardProtocol)
         {
-            diceArray[index].IsChecked = !diceArray[index].IsChecked;
+            ToggleGameBoardComponents(false);
 
-            if (diceArray[index].IsChecked)
+            this.gameBoardProtocol = gameBoardProtocol;
+            if (gameBoardProtocol.Command == "Final turn")
             {
-                pictureBoxDiceList[index].BackColor = Color.DarkGray;
-
-            }
-            else
-            {
-                pictureBoxDiceList[index].BackColor = Color.Transparent;
-
-            }
-        }
-
-        //private void NextPlayer()
-        //{
-        //    CurrentPlayer
-        //    throwCounter = 0;
-        //    buttonThrowDice.Enabled = true;
-
-        //}
-
-        private void UpperSectionPointFieldManager(Dice[] chosenDice, int row)
-        {
-            if (chosenDice.Length != 0)
-            {
-                bool isOK = DiceValidationUtils.UpperSectionValidation(row, chosenDice);
-
-                if (isOK)
+                if (gameBoardProtocol.CurrentPlayer == PlayerId)
                 {
-                    int points = DiceValidationUtils.CalculatePoints(row, chosenDice);
-                    Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, row);
-                    myLabel.Text = points.ToString();
-
-                    // Kolla om bonusdags
-                    CalculateSubtotalAndBonus();
-                    CalculateTotal();
-                    UpdateProtocolGameBoard(row, points);
-                    NextTurn();
-                    // Todo: resetta variabler
-                    //InitNewTurn();
-
+                    MessageBox.Show($"You win!");
                 }
                 else
                 {
-                    CrossOutHandler(row);
+                    MessageBox.Show("You lose! Are you in the Java class?!?!!?");
                 }
             }
             else
             {
-                textBoxStatus.Text = "Normal people would choose at least one dice...";
+                CurrentPlayer = gameBoardProtocol.CurrentPlayer;
+            }
+
+
+            if (gameBoardProtocol.CurrentPlayer == PlayerId)
+            {
+                ToggleGameBoardComponents(true);
+            }
+            for (int col = 0; col < gameBoardProtocol.ListOfGameBoards.Count; col++)
+            {
+
+                //Sätter namn
+                Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(col + 1, 0);
+                myLabel.Text = gameBoardProtocol.ListOfGameBoards[col].Name;
+
+                for (int row = 0; row < gameBoardProtocol.ListOfGameBoards[col].PointArray.Length; row++)
+                {
+                    myLabel = (Label)tableScoreBoard.GetControlFromPosition(col + 1, row + 1);
+                    myLabel.Text = gameBoardProtocol.ListOfGameBoards[col].PointArray[row].Point;
+                }
+
             }
         }
 
@@ -225,7 +172,7 @@ namespace Projekt3Yatzy
         {
             gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[row - 1].Point = points.ToString();
             gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[row - 1].IsUsed = true;
-            
+
         }
 
         private void NextTurn()
@@ -240,107 +187,15 @@ namespace Projekt3Yatzy
 
             MyClient.Send(protocol);
         }
+        #endregion
 
-        private void CalculateSubtotalAndBonus()
-        {
-            int sum = 0;
-            for (int i = 1; i <= 6; i++)
-            {
-                Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, i);
+        #region Point check methods
 
-                int points = 0;
-                try
-                {
-                    points = Convert.ToInt32(myLabel.Text);
-                    sum += points;
-
-                }
-                catch
-                {
-                    //return;
-                }
-            }
-
-            int subtotalLabelRow = 7;
-            int bonusLabelRow = 8;
-
-            Label subtotal = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, subtotalLabelRow);
-
-            subtotal.Text = sum.ToString();
-            gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[subtotalLabelRow - 1].Point = sum.ToString();
-            gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[subtotalLabelRow - 1].IsUsed = true;
-
-            Label bonus = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, bonusLabelRow);
-
-            bonus.Text = sum >= 63 ? "50" : "0";
-
-            gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[bonusLabelRow - 1].Point = bonus.Text;
-            gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[bonusLabelRow - 1].IsUsed = true;
-        }
-
-        private void CalculateTotal()
-        {
-            int sum = 0;
-            for (int i = 7; i <= 17; i++)
-            {
-                Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, i);
-
-                int points = 0;
-                try
-                {
-                    points = Convert.ToInt32(myLabel.Text);
-                    sum += points;
-                }
-                catch
-                {
-                    //return;
-                }
-            }
-            Label total = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, 18);
-
-            total.Text = sum.ToString();
-
-            int arrayCount = gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray.Length;
-            gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[arrayCount - 1].Point = sum.ToString();
-            gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[arrayCount - 1].IsUsed = true;
-
-            gameBoardProtocol.Command = "Final turn";
-            SendProtocolToServer();
-
-        }
-
-        private void CrossOutHandler(int row)
-        {
-            rowToCrossOut = row;
-
-            textBoxStatus.Text = "Do you want to cross out the current point field?";
-
-            ToggleGameBoardComponents();
-
-            buttonCrossOutNo.Visible = true;
-            buttonCrossOutYes.Visible = true;
-        }
-
-        private void ToggleGameBoardComponents()
-        {
-            tableScoreBoard.Enabled = !tableScoreBoard.Enabled;
-            buttonThrowDice.Enabled = !buttonThrowDice.Enabled;
-            foreach (var pictureBox in pictureBoxDiceList)
-            {
-                pictureBox.Enabled = !pictureBox.Enabled;
-            }
-        }
-
-        private void ToggleGameBoardComponents(bool enabled)
-        {
-            tableScoreBoard.Enabled = enabled;
-            buttonThrowDice.Enabled = enabled;
-            foreach (var pictureBox in pictureBoxDiceList)
-            {
-                pictureBox.Enabled = enabled;
-            }
-        }
-
+        /// <summary>
+        /// All clicks on a pointfield goes here.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PointField_Click(object sender, EventArgs e)
         {
             if (sender is Control)
@@ -407,6 +262,7 @@ namespace Projekt3Yatzy
                 }
             }
         }
+
 
         private void CheckIfYatzy(Dice[] diceArray, int row)
         {
@@ -548,6 +404,121 @@ namespace Projekt3Yatzy
 
         }
 
+        private void UpperSectionPointFieldManager(Dice[] chosenDice, int row)
+        {
+            if (chosenDice.Length != 0)
+            {
+                bool isOK = DiceValidationUtils.UpperSectionValidation(row, chosenDice);
+
+                if (isOK)
+                {
+                    int points = DiceValidationUtils.CalculatePoints(row, chosenDice);
+                    Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, row);
+                    myLabel.Text = points.ToString();
+
+                    // Kolla om bonusdags
+                    CalculateSubtotalAndBonus();
+                    CalculateTotal();
+                    UpdateProtocolGameBoard(row, points);
+                    NextTurn();
+                    // Todo: resetta variabler
+                    //InitNewTurn();
+
+                }
+                else
+                {
+                    CrossOutHandler(row);
+                }
+            }
+            else
+            {
+                textBoxStatus.Text = "Normal people would choose at least one dice...";
+            }
+        }
+
+
+        private void CalculateSubtotalAndBonus()
+        {
+            int sum = 0;
+            for (int i = 1; i <= 6; i++)
+            {
+                Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, i);
+
+                int points = 0;
+                try
+                {
+                    points = Convert.ToInt32(myLabel.Text);
+                    sum += points;
+
+                }
+                catch
+                {
+                    //return;
+                }
+            }
+
+            int subtotalLabelRow = 7;
+            int bonusLabelRow = 8;
+
+            Label subtotal = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, subtotalLabelRow);
+
+            subtotal.Text = sum.ToString();
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[subtotalLabelRow - 1].Point = sum.ToString();
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[subtotalLabelRow - 1].IsUsed = true;
+
+            Label bonus = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, bonusLabelRow);
+
+            bonus.Text = sum >= 63 ? "50" : "0";
+
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[bonusLabelRow - 1].Point = bonus.Text;
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[bonusLabelRow - 1].IsUsed = true;
+        }
+
+        private void CalculateTotal()
+        {
+            int sum = 0;
+            for (int i = 7; i <= 17; i++)
+            {
+                Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, i);
+
+                int points = 0;
+                try
+                {
+                    points = Convert.ToInt32(myLabel.Text);
+                    sum += points;
+                }
+                catch
+                {
+                    //return;
+                }
+            }
+            Label total = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, 18);
+
+            total.Text = sum.ToString();
+
+            int arrayCount = gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray.Length;
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[arrayCount - 1].Point = sum.ToString();
+            gameBoardProtocol.ListOfGameBoards[CurrentPlayer - 1].PointArray[arrayCount - 1].IsUsed = true;
+
+            gameBoardProtocol.Command = "Final turn";
+            SendProtocolToServer();
+
+        }
+        #endregion
+
+        #region Cross-out logic
+        private void CrossOutHandler(int row)
+        {
+            rowToCrossOut = row;
+
+            textBoxStatus.Text = "Do you want to cross out the current point field?";
+
+            ToggleGameBoardComponents();
+
+            buttonCrossOutNo.Visible = true;
+            buttonCrossOutYes.Visible = true;
+        }
+
         private void buttonCrossOutYes_Click(object sender, EventArgs e)
         {
 
@@ -578,11 +549,56 @@ namespace Projekt3Yatzy
 
             textBoxStatus.Text = "Please, make a better move then...";
         }
+        #endregion
 
+        #region Toggle methods
         private void ToggleCrossOutButtons()
         {
             buttonCrossOutNo.Visible = !buttonCrossOutNo.Visible;
             buttonCrossOutYes.Visible = !buttonCrossOutYes.Visible;
+        }
+
+        private void ToggleGameBoardComponents()
+        {
+            tableScoreBoard.Enabled = !tableScoreBoard.Enabled;
+            buttonThrowDice.Enabled = !buttonThrowDice.Enabled;
+            foreach (var pictureBox in pictureBoxDiceList)
+            {
+                pictureBox.Enabled = !pictureBox.Enabled;
+            }
+        }
+
+        private void ToggleGameBoardComponents(bool enabled)
+        {
+            tableScoreBoard.Enabled = enabled;
+            buttonThrowDice.Enabled = enabled;
+            foreach (var pictureBox in pictureBoxDiceList)
+            {
+                pictureBox.Enabled = enabled;
+            }
+        }
+
+        private void ToggleEnabledDice(int index)
+        {
+            diceArray[index].IsChecked = !diceArray[index].IsChecked;
+
+            if (diceArray[index].IsChecked)
+            {
+                pictureBoxDiceList[index].BackColor = Color.DarkGray;
+
+            }
+            else
+            {
+                pictureBoxDiceList[index].BackColor = Color.Transparent;
+
+            }
+        }
+
+        #endregion
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            this.BackColor = Color.Teal;
         }
     }
 }
