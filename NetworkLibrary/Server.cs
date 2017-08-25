@@ -45,7 +45,7 @@ namespace NetworkLibrary
 
                     Thread.Sleep(1000);
 
-                    if (clients.Count() >= 2 || CurrentPlayerList.Count == 2)
+                    if (clients.Count() >= 4 || CurrentPlayerList.Count == 4)
                     {
                         Thread.Sleep(500);
                         StartGame();
@@ -138,6 +138,8 @@ namespace NetworkLibrary
             else
             {
                 jsonobject.Command = "Next turn";
+                //turnCounter++;
+                jsonobject.CurrentPlayer = (turnCounter % clients.Count()) + 1; 
             }
 
             string jsonToSend = JsonConvert.SerializeObject(jsonobject);

@@ -25,9 +25,9 @@ namespace Projekt3Yatzy
 
         public int PlayerId { get; set; }
 
-        int throwCounter = 0;
-
         int CurrentPlayer = 1;
+
+        int throwCounter = 0;
 
         int rowToCrossOut = 0;
 
