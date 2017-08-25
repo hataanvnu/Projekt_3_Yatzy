@@ -17,5 +17,11 @@ namespace Projekt3Yatzy
             Value = value;
             IsChecked = false;
         }
+
+        public Dice()
+        {
+            Value = 0;
+            IsChecked = false;
+        }
     }
 }

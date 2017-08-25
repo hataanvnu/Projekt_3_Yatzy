@@ -62,9 +62,14 @@ namespace Projekt3Yatzy
             pictureBoxDiceList[2] = pictureBoxDice2;
             pictureBoxDiceList[3] = pictureBoxDice3;
             pictureBoxDiceList[4] = pictureBoxDice4;
+
+            diceArray[0] = new Dice();
+            diceArray[1] = new Dice();
+            diceArray[2] = new Dice();
+            diceArray[3] = new Dice();
+            diceArray[4] = new Dice();
         }
         #endregion
-        
 
         #region Dice picture box logic
 
@@ -85,12 +90,17 @@ namespace Projekt3Yatzy
                 pictureBoxDiceList[i].Image = Image.FromFile($@"..\..\images\dice{diceArray[i].Value}.png");
             }
 
+            foreach (var diceImage in pictureBoxDiceList)
+            {
+                diceImage.Visible = true;
+            }
+
 
             int throwsLeft = 3 - throwCounter;
 
             if (throwsLeft == 0)
             {
-                //buttonThrowDice.Enabled = false;
+                buttonThrowDice.Enabled = false;
                 textBoxStatus.Text = $"Välj de tärningar du vill använda för poänggivning";
             }
             else
@@ -125,7 +135,20 @@ namespace Projekt3Yatzy
         }
         #endregion
 
+        private void ResetButtons()
+        {
+            throwCounter = 0;
+            for (int i = 0; i < pictureBoxDiceList.Length; i++)
+            {
+                pictureBoxDiceList[i].Visible = false;
+                pictureBoxDiceList[i].BackColor = Color.Transparent;
+                diceArray[i].IsChecked = false;
+
+            }
+        }
+
         #region protocol and server stuff
+
         public void UpdateFormGameBoard(GameBoardJsonObject gameBoardProtocol)
         {
             ToggleGameBoardComponents(false);
@@ -151,7 +174,9 @@ namespace Projekt3Yatzy
             if (gameBoardProtocol.CurrentPlayer == PlayerId)
             {
                 ToggleGameBoardComponents(true);
+                ResetButtons();
             }
+
             for (int col = 0; col < gameBoardProtocol.ListOfGameBoards.Count; col++)
             {
 
@@ -453,7 +478,7 @@ namespace Projekt3Yatzy
                 }
                 catch
                 {
-                    //return;
+                    return;
                 }
             }
 
@@ -489,7 +514,7 @@ namespace Projekt3Yatzy
                 }
                 catch
                 {
-                    //return;
+                    return;
                 }
             }
             Label total = (Label)tableScoreBoard.GetControlFromPosition(CurrentPlayer, 18);
