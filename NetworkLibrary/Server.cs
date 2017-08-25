@@ -16,7 +16,12 @@ namespace NetworkLibrary
     {
         List<ClientHandler> clients = new List<ClientHandler>();
         int turnCounter = 0;
+        public List<string> CurrentPlayerList { get; set; }
 
+        public Server()
+        {
+            CurrentPlayerList = new List<string>();
+        }
 
         public void Run()
         {
@@ -29,6 +34,7 @@ namespace NetworkLibrary
 
                 while (true)
                 {
+
                     TcpClient c = listener.AcceptTcpClient();
                     ClientHandler newClient = new ClientHandler(c, this);
                     clients.Add(newClient);
@@ -37,8 +43,11 @@ namespace NetworkLibrary
                     Thread clientThread = new Thread(newClient.Run);
                     clientThread.Start();
 
-                    if (clients.Count() == 2)
+                    Thread.Sleep(1000);
+
+                    if (clients.Count() >= 2 || CurrentPlayerList.Count == 2)
                     {
+                        Thread.Sleep(500);
                         StartGame();
                         break;
                     }
@@ -60,6 +69,7 @@ namespace NetworkLibrary
         {
             var startGameCommand = new GameBoardJsonObject();
             startGameCommand.Command = "Start game";
+            startGameCommand.Names = CurrentPlayerList;
 
             for (int i = 0; i < clients.Count; i++)
             {
@@ -70,11 +80,23 @@ namespace NetworkLibrary
                 BinaryWriter w = new BinaryWriter(n);
                 w.Write(jsonToSend);
             }
-           
+
         }
 
         internal void DisconnectClient(ClientHandler clientHandler)
         {
+
+            GameBoardJsonObject disconnectCommand = new GameBoardJsonObject();
+            disconnectCommand.Command = "Disconnected";
+
+            string jsonToSend = JsonConvert.SerializeObject(disconnectCommand);
+
+            NetworkStream n = clientHandler.TcpClient.GetStream();
+            BinaryWriter w = new BinaryWriter(n);
+            w.Write(jsonToSend);
+
+
+
             clients.Remove(clientHandler);
             Console.WriteLine("Client X has left the building...");
             //todo Skriv i message box att någon lämnat spelet
@@ -94,8 +116,21 @@ namespace NetworkLibrary
                 jsonobject.CurrentPlayer = (turnCounter % clients.Count()) + 1; //todo modulus
 
             }
+            else if (jsonobject.Command == "Validate name")
+            {
+                // Om namnet redan finns, disconnecta clienten igen.
+                if (CurrentPlayerList.Where(p => p == jsonobject.NewName).Count() == 1)
+                {
+                    DisconnectClient(client);
+                    return;
+                }
+                else
+                {
+                    CurrentPlayerList.Add(jsonobject.NewName);
 
-            if (jsonobject.Command == "Final turn" && jsonobject.CurrentPlayer == clients.Count)
+                }
+            }
+            else if (jsonobject.Command == "Final turn" && jsonobject.CurrentPlayer == clients.Count)
             {
                 Console.WriteLine("Someone won");
                 jsonobject.PlayerId = jsonobject.ListOfGameBoards.Max(x => Convert.ToInt32(x.PointArray[17].Point));

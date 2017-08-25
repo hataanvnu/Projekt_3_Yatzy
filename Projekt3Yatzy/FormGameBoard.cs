@@ -16,7 +16,9 @@ namespace Projekt3Yatzy
     public partial class FormGameBoard : Form
     {
         #region props and fields
+
         public Client MyClient { get; set; }
+
         PictureBox[] pictureBoxDiceList = new PictureBox[5];
 
         Dice[] diceArray = new Dice[5];
@@ -30,17 +32,16 @@ namespace Projekt3Yatzy
         int rowToCrossOut = 0;
 
         GameBoardJsonObject gameBoardProtocol;
-        List<string> testList = new List<string> { "Petter", "Johan" };
 
         #endregion
 
         #region methods start automaticly starts when the form opens
-        public FormGameBoard(Client myClient, int playerId)
+        public FormGameBoard(Client myClient, int playerId, List<string> names)
         {
             InitializeComponent();
 
             PlayerId = playerId;
-            gameBoardProtocol = new GameBoardJsonObject(testList);
+            gameBoardProtocol = new GameBoardJsonObject(names);
 
             MyClient = myClient;
             MyClient.MyGameBoard = this;
@@ -101,11 +102,11 @@ namespace Projekt3Yatzy
             if (throwsLeft == 0)
             {
                 buttonThrowDice.Enabled = false;
-                textBoxStatus.Text = $"Välj de tärningar du vill använda för poänggivning";
+                textBoxStatus.Text = $"Guess you've used up all your chances. Choose dice and pointfield.";
             }
             else
             {
-                textBoxStatus.Text = $"{throwsLeft} kast kvar...";
+                textBoxStatus.Text = $"{throwsLeft} throws to go...";
             }
         }
 
@@ -162,7 +163,7 @@ namespace Projekt3Yatzy
                 }
                 else
                 {
-                    MessageBox.Show("You lose! Are you in the Java class?!?!!?");
+                    MessageBox.Show("You lose! Are you from the Java class?!");
                 }
             }
             else
@@ -170,9 +171,10 @@ namespace Projekt3Yatzy
                 CurrentPlayer = gameBoardProtocol.CurrentPlayer;
             }
 
-
+            // Kollar om det är din tur eller inte.
             if (gameBoardProtocol.CurrentPlayer == PlayerId)
             {
+                textBoxStatus.Text = "It's your turn. At least try your best.";
                 ToggleGameBoardComponents(true);
                 ResetButtons();
             }
@@ -184,6 +186,17 @@ namespace Projekt3Yatzy
                 Label myLabel = (Label)tableScoreBoard.GetControlFromPosition(col + 1, 0);
                 myLabel.Text = gameBoardProtocol.ListOfGameBoards[col].Name;
 
+                // Sätter bold text på den spelaren som har turen nu
+                if (col+1 == CurrentPlayer)
+                {
+                    myLabel.Font = new Font(Label.DefaultFont, FontStyle.Bold);
+                }
+                else
+                {
+                    myLabel.Font = new Font(Label.DefaultFont, FontStyle.Regular);
+                }
+
+                // Fyller i scoreboarden med poäng
                 for (int row = 0; row < gameBoardProtocol.ListOfGameBoards[col].PointArray.Length; row++)
                 {
                     myLabel = (Label)tableScoreBoard.GetControlFromPosition(col + 1, row + 1);

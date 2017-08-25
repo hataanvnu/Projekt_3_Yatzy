@@ -17,12 +17,12 @@ namespace Projekt3Yatzy
         public TcpClient TcpClient { get; set; }
         public FormGameBoard MyGameBoard { get; set; }
         public string Name { get; set; }
-        FormStartPage startPage;
+        FormStartPage myStartPage;
 
         public Client(string name, FormStartPage startPage)
         {
             Name = name;
-            this.startPage = startPage;
+            this.myStartPage = startPage;
         }
 
         public void Start()
@@ -37,16 +37,17 @@ namespace Projekt3Yatzy
             }
             catch (Exception)
             {
-               // startPage.get
+                // startPage.get
 
             }
         }
 
         private void Listen()
         {
+            bool quit = false;
             try
             {
-                while (true)
+                while (!quit)
                 {
                     NetworkStream n = TcpClient.GetStream();
                     string message = new BinaryReader(n).ReadString();
@@ -55,23 +56,30 @@ namespace Projekt3Yatzy
                     //todo uppdatera spelplan efter json data kommer in
                     var gameBoard = JsonConvert.DeserializeObject<GameBoardJsonObject>(message);
 
-                    if (gameBoard.Command=="Final turn")
+                    if (gameBoard.Command == "Final turn")
                     {
                         MyGameBoard.UpdateFormGameBoard(gameBoard);
 
                     }
-
                     else if (gameBoard.Command == "Next turn")
                     {
                         MyGameBoard.UpdateFormGameBoard(gameBoard);
 
                     }
-
                     else if (gameBoard.Command == "Start game")
                     {
                         //Application.Run(new FormGameBoard(this,gameBoard.PlayerId));
-                        var tmp = new FormGameBoard(this, gameBoard.PlayerId);
-                        startPage.Invoke(new Action(tmp.Show));
+                        var tmp = new FormGameBoard(this, gameBoard.PlayerId, gameBoard.Names);
+                        myStartPage.Invoke(new Action(tmp.Show));
+                    }
+                    else if (gameBoard.Command == "Disconnected")
+                    {
+                        myStartPage.Invoke(new Action(myStartPage.IndicateUserNameTaken));
+                        quit = true;
+                    }
+                    else if (gameBoard.Command == "Validate name")
+                    {
+                        myStartPage.Invoke(new Action(myStartPage.IndicateWaitForPlayers));
 
                     }
                 }

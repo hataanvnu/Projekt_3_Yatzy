@@ -14,6 +14,7 @@ namespace ProtocolUtils
         public string Version { get; set; }
         public List<string> Names { get; set; }
         public int PlayerId { get; set; }
+        public string NewName { get; set; }
 
         public GameBoardJsonObject(List<string> names)
         {
@@ -30,7 +31,7 @@ namespace ProtocolUtils
 
         public GameBoardJsonObject()
         {
-
+            Names = new List<string>();
         }
     }
 }
